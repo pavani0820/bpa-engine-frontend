@@ -75,30 +75,27 @@ export default function Stages() {
     const [serviceCatalog, setServiceCatalog] = useState(sc)
     const [stages, setStages] = useState([])
     const [value, setValue] = useState(0)
-    const [checked, setChecked] = useState([])
+    const [checked, setChecked] = useState([false,false,false])
     const [optionsChecked, setOptionsChecked] = useState([])
     const [options, setOptions] = useState(null)
     const [done, setDone] = useState(false)
     // const [lastViewInputTypes, setLastViewInputTypes] = useState([])
 
     const filetypes = ["pdf", "jpg", "wav"]
+    
 
     useEffect(() => {
         const getSC = async () => {
             const result = await axios.get('/api/serviceCatalog')
             setServiceCatalog(result.data)
-            console.log(serviceCatalog)
         }
         getSC()
-        for (let i=0;i<filetypes.length;i++) {
-            let _checked = false
-            checked.push(_checked)
-            setChecked(checked)
-            // const onChange = () => {console.log(`handler for ${f}`)}
-            // checkboxes.push(<Checkbox checked={checked[index]} index={index} filetype={f} onChange={onChange}/>)
-            // setCheckboxes(checkboxes)
-        }
-    },[checked,filetypes.length,serviceCatalog])
+        // for (let i=0;i<filetypes.length;i++) {
+        //     let _checked = false
+        //     checked.push(_checked)
+        //     setChecked(checked)
+        // }
+    },[])
 
     const onDone = (event) => {
         setOptions([])
@@ -106,129 +103,112 @@ export default function Stages() {
         axios.post('/api/config',stages)
     }
 
-    const onNext = (event) => {
-        if (stages.length === 0) {
-            let ftList = []
-            for (let i = 0; i < checked.length; i++) {
-                if (checked[i]) {
-                    ftList.push(filetypes[i])
+    const getSelectedFileTypes = () => {
+        let ftList = []
+        for (let i = 0; i < checked.length; i++) {
+            if (checked[i]) {
+                ftList.push(filetypes[i])
+            }
+        }
+        return ftList
+    }
+
+    const getMatchingOptions = (previousStage) => {
+        const _options = []
+        for (const k in serviceCatalog) {
+            console.log(k)
+            for (const acceptedInputType of serviceCatalog[k].inputTypes) {
+                if (acceptedInputType === "any") {
+                    _options.push(k)
+                    break;
+                }
+                if (previousStage.outputTypes.includes(acceptedInputType.toLowerCase())) {
+                    _options.push(k)
+                    break;
                 }
             }
+        }
+        return _options
+    }
+
+    const getSelectedOptionIndex = () => {
+        let index = 0
+        for(let i=0;i<optionsChecked.length;i++){
+            if(optionsChecked[i]){
+                index = i
+                break
+            }
+        }
+        return index
+    }
+
+    const onNext = (event) => {
+        if (stages.length === 0) { //if first stage, set up file types  
             const stage = {
                 inputTypes: ["first"],
-                outputTypes: ftList,
+                outputTypes: getSelectedFileTypes(),
                 name : "document type"
             }
             setStages([stage])
 
-            const _options = []
-            for (const k in sc) {
-                console.log(k)
-                for (const acceptedInputType of sc[k].inputTypes) {
-                    if (acceptedInputType === "any") {
-                        //setLastViewInputTypes(sc[k].inputTypes)
-                        _options.push(k)
-                        break;
-                    }
-                    console.log(stage.outputTypes)
-                    if (stage.outputTypes.includes(acceptedInputType.toLowerCase())) {
-                        console.log(acceptedInputType)
-
-                        _options.push(k)
-                        break;
-                    }
-                }
-
-            }
+            //get the matching outputs from the serviceCatalog 
+            const _options = getMatchingOptions(stage)
             setOptions(_options)
-            for(let i=0;i<_options.length;i++){
-                optionsChecked.push(false)
-                setOptionsChecked(optionsChecked)
-            }
+
+            //initialize the checkboxes to false
+            optionsChecked.fill(false,0,_options.length-1)
+            setOptionsChecked(optionsChecked)
 
         } else {
-            let index = 0
-            for(let i=0;i<optionsChecked.length;i++){
-                if(optionsChecked[i]){
-                    index = i
-                    break
-                }
-            }
+            const selectedIndex = getSelectedOptionIndex()
 
             const newStage = {
-                name : sc[options[index]].name,
-                inputTypes : sc[options[index]].inputTypes,
-                outputTypes : sc[options[index]].outputTypes,
+                name : serviceCatalog[options[selectedIndex]].name,
+                inputTypes : serviceCatalog[options[selectedIndex]].inputTypes,
+                outputTypes : serviceCatalog[options[selectedIndex]].outputTypes,
             }
 
+            //in the case of 'any', copy the output type of the previous stage
             if(newStage.outputTypes.includes('any')){
                 newStage.outputTypes = stages[stages.length-1].outputTypes
             }
 
             stages.push(newStage)
             setStages(stages)
-            setValue(value + 1)
-            console.log(newStage)
 
-            const _options = []
-            for (const k in sc) {
-                console.log(k)
-                for (const acceptedInputType of sc[k].inputTypes) {
-                    if (acceptedInputType === "any") {
-                        _options.push(k)
-                        break;
-                    }
-                    
-                    if (newStage.outputTypes.includes(acceptedInputType.toLowerCase())) {
-                        console.log(acceptedInputType)
+            //setValue(value + 1) //updating state with arrays doesn't render.  just using this to force a rerender
 
-                        _options.push(k)
-                        break;
-                    }
-                }
-
-            }
+            const _options = getMatchingOptions(newStage)
             setOptions(_options)
-            let _optionsChecked = []
-            for(let i=0;i<_options.length;i++){
-                _optionsChecked.push(false)
-            }
-            setOptionsChecked(_optionsChecked)
+
+            optionsChecked.fill(false,0,_options.length-1)
+            setOptionsChecked(optionsChecked)
             
         }
 
-        setValue(value + 1)
+        setValue(value + 1) //useState on arrays doesn't kick off rerender.  just forcing a rerender.
     }
 
     
     const onRadioChange = (event) => {
-        console.log(event)
-        console.log(`handler for options`)
-        console.log(`id : ${event.target.id}`)
         const index = event.target.id.split('_radio')[0]
-        console.log(`index : ${index}`)
         const _checked = [] 
-        for(let i=0;i<optionsChecked.length;i++){
-            _checked.push(false)
-        }
+        _checked.fill(false,0,optionsChecked.length-1)
         _checked[Number(index)] = true
-        
         setOptionsChecked(_checked)
         setValue(value + 1) //required because checked doesn't for a rerender
     } 
-    const onChange = (event) => {
-        console.log(`handler for ....`)
-        console.log(`id : ${event.target.id}`)
+    const onCheckboxChange = (event) => {
         const index = event.target.id.split('_checkbox')[0]
-        console.log(`index : ${index}`)
         checked[Number((index))] = !checked[Number((index))]
         setChecked(checked)
         setValue(value + 1) //required because checked doesn't for a rerender
     }
+
     const renderFileTypes = () => {
         return (
             filetypes.map((f, index) => {
-                return (<Checkbox checked={checked} index={index} filetype={f} onChange={onChange} />)
+                return (<Checkbox checked={checked} index={index} filetype={f} onChange={onCheckboxChange} />)
             })
         )
     }
