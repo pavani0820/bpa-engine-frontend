@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
-import { Button, Modal } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import Checkbox from './Checkbox';
 import Radio from './Radio'
 
@@ -74,7 +74,6 @@ export default function Stages() {
 
     const [serviceCatalog, setServiceCatalog] = useState(sc)
     const [stages, setStages] = useState([])
-    const [checkboxes, setCheckboxes] = useState([])
     const [value, setValue] = useState(0)
     const [checked, setChecked] = useState([])
     const [optionsChecked, setOptionsChecked] = useState([])
@@ -86,10 +85,10 @@ export default function Stages() {
         const getSC = async () => {
             const result = await axios.get('/api/serviceCatalog')
             setServiceCatalog(result.data)
+            console.log(serviceCatalog)
         }
         getSC()
-        let index = 0
-        for (const f of filetypes) {
+        for (let i=0;i<filetypes.length;i++) {
             let _checked = false
             checked.push(_checked)
             setChecked(checked)
@@ -97,7 +96,7 @@ export default function Stages() {
             // checkboxes.push(<Checkbox checked={checked[index]} index={index} filetype={f} onChange={onChange}/>)
             // setCheckboxes(checkboxes)
         }
-    }, [])
+    },[])
 
     const onDone = (event) => {
         setOptions([])
@@ -106,7 +105,7 @@ export default function Stages() {
     }
 
     const onNext = (event) => {
-        if (stages.length == 0) {
+        if (stages.length === 0) {
             let ftList = []
             for (let i = 0; i < checked.length; i++) {
                 if (checked[i]) {
@@ -124,7 +123,7 @@ export default function Stages() {
             for (const k in sc) {
                 console.log(k)
                 for (const acceptedInputType of sc[k].inputTypes) {
-                    if (acceptedInputType == "any") {
+                    if (acceptedInputType === "any") {
                         //setLastViewInputTypes(sc[k].inputTypes)
                         _options.push(k)
                         break;
@@ -140,7 +139,7 @@ export default function Stages() {
 
             }
             setOptions(_options)
-            for(const option of _options){
+            for(let i=0;i<_options.length;i++){
                 optionsChecked.push(false)
                 setOptionsChecked(optionsChecked)
             }
@@ -173,7 +172,7 @@ export default function Stages() {
             for (const k in sc) {
                 console.log(k)
                 for (const acceptedInputType of sc[k].inputTypes) {
-                    if (acceptedInputType == "any") {
+                    if (acceptedInputType === "any") {
                         _options.push(k)
                         break;
                     }
@@ -189,9 +188,8 @@ export default function Stages() {
             }
             setOptions(_options)
             let _optionsChecked = []
-            for(const option of _options){
+            for(let i=0;i<_options.length;i++){
                 _optionsChecked.push(false)
-                
             }
             setOptionsChecked(_optionsChecked)
             
@@ -208,7 +206,7 @@ export default function Stages() {
         const index = event.target.id.split('_radio')[0]
         console.log(`index : ${index}`)
         const _checked = [] 
-        for(const check of optionsChecked){
+        for(let i=0;i<optionsChecked.length;i++){
             _checked.push(false)
         }
         _checked[Number(index)] = true

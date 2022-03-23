@@ -4,7 +4,6 @@ import Header from './Header';
 import Content from './Content';
 import Footer from './Footer'
 import './custom.scss';
-import Stages from './Stages';
 
 function App({ Component, pageProps }) {
   return (
