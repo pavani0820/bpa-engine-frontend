@@ -96,7 +96,7 @@ export default function Stages() {
             // checkboxes.push(<Checkbox checked={checked[index]} index={index} filetype={f} onChange={onChange}/>)
             // setCheckboxes(checkboxes)
         }
-    },[])
+    },[checked,filetypes.length,serviceCatalog])
 
     const onDone = (event) => {
         setOptions([])
