@@ -9,7 +9,10 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
     
         const database = client.database(process.env.COSMOS_DB_DB);
         const container = database.container(process.env.COSMOS_DB_CONTAINER);
-        const { resource: createdItem } = await container.items.create(req.body);
+        const newBody = req.body
+        newBody["id"] = "1"
+        context.log(`newbody : ${JSON.stringify(newBody)}`)
+        const { resource: createdItem } = await container.items.create(newBody);
         context.res = {
             // status: 200, /* Defaults to 200 */
             body: createdItem
