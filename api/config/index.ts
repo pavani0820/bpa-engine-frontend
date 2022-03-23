@@ -10,18 +10,19 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
         const database = client.database(process.env.COSMOS_DB_DB);
         const container = database.container(process.env.COSMOS_DB_CONTAINER);
         const item = await container.item("1")
-        context.log(`item : ${JSON.stringify(item)}`)
         await item.delete()
-        const out = await create(context, req)
-        context.res = {
-            // status: 200, /* Defaults to 200 */
-            body: out
-        };
+        
     } catch (err) {
         context.log(err)
         context.res = {
             body: err
         }
+    } finally {
+        const out = await create(context, req)
+        context.res = {
+            // status: 200, /* Defaults to 200 */
+            body: out
+        };
     }
 
 
