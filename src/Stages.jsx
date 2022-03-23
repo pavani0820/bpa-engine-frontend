@@ -100,7 +100,7 @@ export default function Stages() {
     const onDone = (event) => {
         setOptions([])
         setDone(true)
-        axios.post('/api/config',stages)
+        axios.post('/api/config',{stages: stages, id : "1"})
     }
 
     const getSelectedFileTypes = () => {
@@ -163,6 +163,7 @@ export default function Stages() {
             const selectedIndex = getSelectedOptionIndex()
 
             const newStage = {
+                id : "1234",
                 name : serviceCatalog[options[selectedIndex]].name,
                 inputTypes : serviceCatalog[options[selectedIndex]].inputTypes,
                 outputTypes : serviceCatalog[options[selectedIndex]].outputTypes,
