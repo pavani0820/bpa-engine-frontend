@@ -81,6 +81,8 @@ export default function Stages() {
     const [done, setDone] = useState(false)
     // const [lastViewInputTypes, setLastViewInputTypes] = useState([])
 
+    const filetypes = ["pdf", "jpg", "wav"]
+
     useEffect(() => {
         const getSC = async () => {
             const result = await axios.get('/api/serviceCatalog')
@@ -198,7 +200,7 @@ export default function Stages() {
         setValue(value + 1)
     }
 
-    const filetypes = ["pdf", "jpg", "wav"]
+    
     const onRadioChange = (event) => {
         console.log(event)
         console.log(`handler for options`)
