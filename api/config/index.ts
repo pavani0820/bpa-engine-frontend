@@ -12,7 +12,7 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
         // await container.item(id, category).delete();
         // const item = await container.item("1")
         // await item.delete()
-        const out = create(context, req)
+        const out = await create(context, req)
         context.res = {
             body: out
         }
