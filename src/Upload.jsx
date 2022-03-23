@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FileUploader } from "react-drag-drop-files";
 
 function Upload() {
-    const fileTypes = ["PNG","JPG", "PDF"];
+    const fileTypes = ["PNG","JPG", "PDF","WAV"];
 
     const [image, setImage] = useState(null);
     const [show, setShow] = useState(false);
