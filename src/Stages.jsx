@@ -5,6 +5,18 @@ import Checkbox from './Checkbox';
 import Radio from './Radio'
 
 const sc = {
+    "translateService": {
+        "bpaServiceId": "abc123",
+        "inputTypes": [
+            "text"
+        ],
+        "outputTypes": [
+            "text"
+        ],
+        "name": "translate",
+        "serviceSpecificConfig": {},
+        "serviceSpecificConfigDefaults": {}
+    },
     "formrecLayoutService": {
         "bpaServiceId": "abc123",
         "inputTypes": [
