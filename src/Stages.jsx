@@ -162,7 +162,7 @@ export default function Stages() {
     const onDone = (event) => {
         setOptions([])
         setDone(true)
-        axios.post('/api/config', { stages: stages.slice(1,stages.length-1), id: "1" })
+        axios.post('/api/config', { stages: stages.slice(1,stages.length), id: "1" })
     }
 
     const getMatchingOptions = (previousStage, allowAny) => {
