@@ -8,9 +8,6 @@ import Stages from './Stages'
 // Importing the Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Upload from './Upload';
-import OcrLangCner from './OcrLangCner';
-import OcrLangNer from './OcrLangNer';
-import FormRecGeneralDoc from './FormRecGeneralDoc';
 
 
 export default function Content() {
@@ -30,18 +27,12 @@ export default function Content() {
 
     const renderContent = () => {
         switch (selectedMenuItem) {
-            case 'upload documents':
+            case 'UPLOAD_DOCUMENTS':
                 return (<Upload />)
-            case 'configure pipeline':
+            case 'CONFIGURE_PIPELINE':
                 return (<Stages />)
-            case 'ocr lang cner':
-                return (<OcrLangCner documents={documents} />)
-            case 'ocr lang ner':
-                return(<OcrLangNer documents={documents}/>)
-            case 'formrec general doc':
-                return(<FormRecGeneralDoc documents={documents}/>)
             default:
-                return (<>error {documents}</>)
+                return (<Upload />)
         }
     }
 
@@ -50,8 +41,8 @@ export default function Content() {
 
             <ProSidebar>
                 <Menu iconShape="square">
-                    <MenuItem className="menuItem" onClick={()=>{setSelectedMenuItem('upload documents')}}>Upload Documents</MenuItem>
-                    <MenuItem className="menuItem" onClick={()=>{setSelectedMenuItem('configure pipeline')}}>Configure Pipeline</MenuItem>
+                    <MenuItem className="menuItem" onClick={()=>{setSelectedMenuItem('UPLOAD_DOCUMENTS')}}>Upload Documents</MenuItem>
+                    <MenuItem className="menuItem" onClick={()=>{setSelectedMenuItem('CONFIGURE_PIPELINE')}}>Configure Pipeline</MenuItem>
                 </Menu>
             </ProSidebar>
 
@@ -60,28 +51,5 @@ export default function Content() {
             </div>
         </div>
     )
-
-  //   return (
-  //     <div className="content" >
-
-  //         <ProSidebar>
-  //             <Menu iconShape="square">
-  //                 <MenuItem className="menuItem" onClick={()=>{setSelectedMenuItem('upload documents')}}>Upload Documents</MenuItem>
-  //                 <SubMenu title="Extraction Patterns" >
-  //                     <MenuItem className="menuItem" onClick={()=>{setSelectedMenuItem('ocr lang ner')}}>OCR + Language Studio NER</MenuItem>
-  //                     <MenuItem className="menuItem" onClick={()=>{setSelectedMenuItem('ocr lang cner')}}>OCR + Language Studio Custom NER</MenuItem>
-  //                     <MenuItem className="menuItem" onClick={()=>{setSelectedMenuItem('formrec general doc')}}>Form Recognizer : General Document</MenuItem>
-  //                 </SubMenu>
-  //                 <SubMenu title="Classification Patterns" />
-  //                 <SubMenu title="Translation Patterns" />
-  //                 <SubMenu title="Summarization Patterns" />
-  //             </Menu>
-  //         </ProSidebar>
-
-  //         <div className="content center" >
-  //             {renderContent()}
-  //         </div>
-  //     </div>
-  // )
 
 }

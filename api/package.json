@@ -12,7 +12,6 @@
   "dependencies": {
     "@azure/cosmos": "^3.15.1",
     "@azure/storage-blob": "^12.9.0",
-    
     "axios": "^0.26.1",
     "http-status-enum": "^1.0.2",
     "parse-multipart": "^1.0.4"

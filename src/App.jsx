@@ -11,9 +11,6 @@ function App({ Component, pageProps }) {
       <Header />
       <Content />
       <Footer />
-      {/* <Header />
-      <Body />
-      <Footer /> */}
     </>
   )
 }
