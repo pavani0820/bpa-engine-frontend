@@ -73,7 +73,7 @@ const sc = {
         ],
         "image": logo,
         "label": "Optical Character Recognition (OCR) Service",
-        "name": "ocr",
+        "name": "ocrService",
         "serviceSpecificConfig": {},
         "serviceSpecificConfigDefaults": {}
     },
@@ -86,7 +86,7 @@ const sc = {
         ],
         "image": logo,
         "label": "Write Result From Last Stage To DB",
-        "name": "view",
+        "name": "viewService",
         "bpaServiceId": "abc123",
         "serviceSpecificConfig": {},
         "serviceSpecificConfigDefaults": {}
@@ -100,7 +100,7 @@ const sc = {
         ],
         "image": logo,
         "label": "Language Studio Text Summarization",
-        "name": "summarize",
+        "name": "summarizeService",
         "bpaServiceId": "abc123",
         "serviceSpecificConfig": {},
         "serviceSpecificConfigDefaults": {}
@@ -114,7 +114,7 @@ const sc = {
         ],
         "image": logo,
         "label": "Language Studio Named Entity Recognition",
-        "name": "languageNer",
+        "name": "languageNerService",
         "bpaServiceId": "abc123",
         "serviceSpecificConfig": {},
         "serviceSpecificConfigDefaults": {}
@@ -130,7 +130,7 @@ const sc = {
         ],
         "image": logo,
         "label": "Speech To Text Service",
-        "name": "stt",
+        "name": "sttService",
         "serviceSpecificConfig": {},
         "serviceSpecificConfigDefaults": {}
     }
