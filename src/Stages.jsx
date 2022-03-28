@@ -5,129 +5,6 @@ import pdf from './images/pdf.png'
 import logo from './images/imagetbd.png'
 import OptionCard from './OptionCard';
 
-// const sc = {
-//     "pdf": {
-//         "bpaServiceId": "abc123",
-//         "inputTypes": [
-//             "start"
-//         ],
-//         "outputTypes": [
-//             "pdf"
-//         ],
-//         "image": pdf,
-//         "label": "PDF Document",
-//         "name": "pdf",
-//         "serviceSpecificConfig": {},
-//         "serviceSpecificConfigDefaults": {}
-//     },
-//     "wav": {
-//         "bpaServiceId": "abc123",
-//         "inputTypes": [
-//             "start"
-//         ],
-//         "outputTypes": [
-//             "wav"
-//         ],
-//         "image": logo,
-//         "name": "WAV Document",
-//         "serviceSpecificConfig": {},
-//         "serviceSpecificConfigDefaults": {}
-//     },
-//     "translateService": {
-//         "bpaServiceId": "abc123",
-//         "inputTypes": [
-//             "text"
-//         ],
-//         "outputTypes": [
-//             "text"
-//         ],
-//         "image": logo,
-//         "name": "Translation Service",
-//         "serviceSpecificConfig": {},
-//         "serviceSpecificConfigDefaults": {}
-//     },
-//     "formrecLayoutService": {
-//         "bpaServiceId": "abc123",
-//         "inputTypes": [
-//             "pdf"
-//         ],
-//         "outputTypes": [
-//             "formrecLayout"
-//         ],
-//         "image": logo,
-//         "name": "Form Recognizer Layout Service",
-//         "serviceSpecificConfig": {},
-//         "serviceSpecificConfigDefaults": {}
-//     },
-//     "ocrService": {
-//         "bpaServiceId": "abc123",
-//         "inputTypes": [
-//             "pdf",
-//             "jpg"
-//         ],
-//         "outputTypes": [
-//             "text"
-//         ],
-//         "image": logo,
-//         "name": "Optical Character Recognition (OCR) Service",
-//         "serviceSpecificConfig": {},
-//         "serviceSpecificConfigDefaults": {}
-//     },
-//     "viewService": {
-//         "inputTypes": [
-//             "any"
-//         ],
-//         "outputTypes": [
-//             "any"
-//         ],
-//         "image": logo,
-//         "name": "Write Last Stage To Database",
-//         "bpaServiceId": "abc123",
-//         "serviceSpecificConfig": {},
-//         "serviceSpecificConfigDefaults": {}
-//     },
-//     "summarizeService": {
-//         "inputTypes": [
-//             "text"
-//         ],
-//         "outputTypes": [
-//             "text"
-//         ],
-//         "image": logo,
-//         "name": "Language Studio Summarization Service",
-//         "bpaServiceId": "abc123",
-//         "serviceSpecificConfig": {},
-//         "serviceSpecificConfigDefaults": {}
-//     },
-//     "languageNerService": {
-//         "inputTypes": [
-//             "text"
-//         ],
-//         "outputTypes": [
-//             "languageNer"
-//         ],
-//         "image": logo,
-//         "name": "Language Studio Named Entity Recognition",
-//         "bpaServiceId": "abc123",
-//         "serviceSpecificConfig": {},
-//         "serviceSpecificConfigDefaults": {}
-//     },
-//     "sttService": {
-//         "bpaServiceId": "abc123",
-//         "inputTypes": [
-//             "wav",
-//             "mp3"
-//         ],
-//         "outputTypes": [
-//             "text"
-//         ],
-//         "image": logo,
-//         "name": "Speech To Text Service",
-//         "serviceSpecificConfig": {},
-//         "serviceSpecificConfigDefaults": {}
-//     }
-// }
-
 const sc = {
     "pdf": {
         "bpaServiceId": "abc123",
@@ -270,13 +147,13 @@ export default function Stages() {
 
     useEffect(() => {
         const getSC = async () => {
-            const result = await axios.get('/api/serviceCatalog')
-            setServiceCatalog(result.data)
-            
             const matchingOptions = getMatchingOptions({
                 outputTypes: ["start"]
             })
             setOptions(matchingOptions)
+
+            // const result = await axios.get('/api/serviceCatalog')
+            // setServiceCatalog(result.data)
         }
         getSC()
         // eslint-disable-next-line react-hooks/exhaustive-deps
