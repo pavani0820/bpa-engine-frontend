@@ -13,14 +13,14 @@ import Upload from './Upload';
 export default function Content() {
 
     const [selectedMenuItem, setSelectedMenuItem] = useState("upload documents");
-    const [documents, setDocuments] = useState(null)
+    // const [documents, setDocuments] = useState(null)
 
     useEffect(() => {
         fetch('/api/leases')
             .then(response => response.json())
             .then(data => {
                 console.log(JSON.stringify(`data: ${data}`))
-                setDocuments(data)
+                //doccuments(data)
             })
     }, []);
 
