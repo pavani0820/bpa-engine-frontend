@@ -139,7 +139,7 @@ const sc = {
 
 export default function Stages() {
 
-    const [serviceCatalog, setServiceCatalog] = useState(sc)
+    const [serviceCatalog] = useState(sc)
     const [stages, setStages] = useState([])
     const [value, setValue] = useState(0)
     const [options, setOptions] = useState([])
