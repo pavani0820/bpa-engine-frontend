@@ -1,5 +1,6 @@
 import pdf from './images/pdf.png'
 import logo from './images/imagetbd.png'
+import sentiment from './images/sentimentDemoLogo.svg'
 
 export const sc = {
     "pdf": {
