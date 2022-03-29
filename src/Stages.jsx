@@ -4,6 +4,7 @@ import { Button } from 'react-bootstrap'
 import pdf from './images/pdf.png'
 import logo from './images/imagetbd.png'
 import OptionCard from './OptionCard';
+import _ from 'lodash'
 
 const sc = {
     "pdf": {
@@ -168,7 +169,6 @@ export default function Stages() {
     const getMatchingOptions = (previousStage, allowAny) => {
         const _options = []
         for (const k in serviceCatalog) {
-            console.log(k)
             for (const acceptedInputType of serviceCatalog[k].inputTypes) {
                 if (acceptedInputType === "any" && allowAny) {
                     _options.push(serviceCatalog[k])
@@ -186,11 +186,12 @@ export default function Stages() {
  
     const onItemClick = (event) => {
         console.log("click")
-        const _stages = stages
-        const _event = event
+        const _stages = _.cloneDeep(stages)
+        const _event = _.cloneDeep(event)
         //in the case of 'any', copy the output type of the previous stage
         if (_event.outputTypes.includes('any')) {
             _event.outputTypes = _stages[_stages.length - 1].outputTypes
+            _event.inputTypes = _stages[_stages.length - 1].outputTypes
         }
 
         _stages.push(_event)
