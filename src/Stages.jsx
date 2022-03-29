@@ -183,6 +183,14 @@ export default function Stages() {
         return _options
     }
 
+    const onResetPipeline = () => {
+        setStages([])
+        const matchingOptions = getMatchingOptions({
+            outputTypes: ["start"]
+        })
+        setOptions(matchingOptions)
+    }
+
  
     const onItemClick = (event) => {
         console.log("click")
@@ -234,10 +242,12 @@ export default function Stages() {
         return (<>
             <div style={{ display: "flex" }}>
                 <div style={{ flexDirection: "column" }}>
-
+                    <h4 style={{marginLeft:"50px", marginTop:"30px"}}>Select a stage to add it to your pipeline configuration: </h4>
                     {renderOptions(options)}
-                    <Button variant="primary" onClick={onDone}>Done</Button>{' '}
+                    <h4 style={{marginLeft:"50px"}}>Pipeline Preview: </h4>
                     {renderPipeline(stages)}
+                    <Button variant="primary" onClick={onDone} style={{marginLeft:"50px"}}>Done</Button>{' '}
+                    <Button variant="primary" onClick={onResetPipeline} style={{marginLeft:"50px"}}>Reset Pipeline</Button>{' '}
                 </div>
             </div>
 
