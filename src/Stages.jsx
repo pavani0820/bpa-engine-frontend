@@ -185,7 +185,7 @@ export default function Stages() {
 
  
     const onItemClick = (event) => {
-
+        console.log("click")
         const _stages = stages
         const _event = event
         //in the case of 'any', copy the output type of the previous stage
