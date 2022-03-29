@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Button } from 'react-bootstrap'
 import pdf from './images/pdf.png'
 import logo from './images/imagetbd.png'
+import arrow from './images/arrow.png'
 import OptionCard from './OptionCard';
 import _ from 'lodash'
 
@@ -35,6 +36,21 @@ const sc = {
         "serviceSpecificConfig": {},
         "serviceSpecificConfigDefaults": {}
     },
+    "ocrService": {
+        "bpaServiceId": "abc123",
+        "inputTypes": [
+            "pdf",
+            "jpg"
+        ],
+        "outputTypes": [
+            "text"
+        ],
+        "image": logo,
+        "label": "Optical Character Recognition (OCR) Service",
+        "name": "ocr",
+        "serviceSpecificConfig": {},
+        "serviceSpecificConfigDefaults": {}
+    },
     "translateService": {
         "bpaServiceId": "abc123",
         "inputTypes": [
@@ -63,21 +79,6 @@ const sc = {
         "serviceSpecificConfig": {},
         "serviceSpecificConfigDefaults": {}
     },
-    "ocrService": {
-        "bpaServiceId": "abc123",
-        "inputTypes": [
-            "pdf",
-            "jpg"
-        ],
-        "outputTypes": [
-            "text"
-        ],
-        "image": logo,
-        "label": "Optical Character Recognition (OCR) Service",
-        "name": "ocr",
-        "serviceSpecificConfig": {},
-        "serviceSpecificConfigDefaults": {}
-    },
     "viewService": {
         "inputTypes": [
             "any"
@@ -86,7 +87,7 @@ const sc = {
             "any"
         ],
         "image": logo,
-        "label": "Write Result From Last Stage To DB",
+        "label": "Export Last Stage To DB",
         "name": "view",
         "bpaServiceId": "abc123",
         "serviceSpecificConfig": {},
@@ -163,7 +164,7 @@ export default function Stages() {
     const onDone = (event) => {
         setOptions([])
         setDone(true)
-        axios.post('/api/config', { stages: stages.slice(1,stages.length), id: "1" })
+        axios.post('/api/config', { stages: stages.slice(1, stages.length), id: "1" })
     }
 
     const getMatchingOptions = (previousStage, allowAny) => {
@@ -191,7 +192,7 @@ export default function Stages() {
         setOptions(matchingOptions)
     }
 
- 
+
     const onItemClick = (event) => {
         console.log("click")
         const _stages = _.cloneDeep(stages)
@@ -201,7 +202,6 @@ export default function Stages() {
             _event.outputTypes = _stages[_stages.length - 1].outputTypes
             _event.inputTypes = _stages[_stages.length - 1].outputTypes
         }
-
         _stages.push(_event)
         setStages(_stages)
 
@@ -227,7 +227,19 @@ export default function Stages() {
             return (
                 <div style={{ display: "flex", padding: "30px" }} >
                     {stages.map((option, index) => {
-                        return (<OptionCard option={option} onClickHandler={onItemClick} />)
+                        console.log(`index : ${index}`)
+                        if (index === stages.length - 1) {
+                            return (
+                                <>
+                                    <OptionCard option={option} />
+                                </>)
+                        } else {
+                            return (
+                                <>
+                                    <OptionCard option={option} />
+                                    <img src={arrow} alt="progress indicator" />
+                                </>)
+                        }
                     })}
                 </div>
             )
@@ -242,12 +254,12 @@ export default function Stages() {
         return (<>
             <div style={{ display: "flex" }}>
                 <div style={{ flexDirection: "column" }}>
-                    <h4 style={{marginLeft:"50px", marginTop:"30px"}}>Select a stage to add it to your pipeline configuration: </h4>
+                    <h4 style={{ marginLeft: "50px", marginTop: "30px" }}>Select a stage to add it to your pipeline configuration: </h4>
                     {renderOptions(options)}
-                    <h4 style={{marginLeft:"50px"}}>Pipeline Preview: </h4>
+                    <h4 style={{ marginLeft: "50px" }}>Pipeline Preview: </h4>
                     {renderPipeline(stages)}
-                    <Button variant="primary" onClick={onDone} style={{marginLeft:"50px"}}>Done</Button>{' '}
-                    <Button variant="primary" onClick={onResetPipeline} style={{marginLeft:"50px"}}>Reset Pipeline</Button>{' '}
+                    <Button variant="primary" onClick={onDone} style={{ marginLeft: "50px" }}>Done</Button>{' '}
+                    <Button variant="primary" onClick={onResetPipeline} style={{ marginLeft: "50px" }}>Reset Pipeline</Button>{' '}
                 </div>
             </div>
 
