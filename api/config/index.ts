@@ -33,9 +33,9 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
             const client = new CosmosClient(process.env.COSMOS_DB_CONNECTION_STRING);
             const database = client.database(process.env.COSMOS_DB_DB);
             const container = database.container(process.env.COSMOS_DB_CONTAINER);
-            const { resources: items } = await container.items.readAll().fetchAll();
+            const result = await getConfig(container)
             context.res = {
-                body : items
+                body : result
             }
         } catch(err){
             context.log(err)
@@ -46,6 +46,16 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
         
     }
 };
+
+const getConfig = async (container) : Promise<any> => {
+    try{
+        const item = await container.item("1").read()
+        return item.resource
+    } catch(err){
+        console.log(err)
+    }
+    return null
+}
 
 const create = async function (context: Context, req: HttpRequest): Promise<void> {
 
