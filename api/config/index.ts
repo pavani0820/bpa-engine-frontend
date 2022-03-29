@@ -33,7 +33,7 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
             const client = new CosmosClient(process.env.COSMOS_DB_CONNECTION_STRING);
             const database = client.database(process.env.COSMOS_DB_DB);
             const container = database.container(process.env.COSMOS_DB_CONTAINER);
-            const items = await container.items.readAll()
+            const { resources: items } = await container.items.readAll().fetchAll();
             context.res = {
                 body : items
             }
