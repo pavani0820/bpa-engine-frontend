@@ -57,7 +57,9 @@ export const sc = {
         "image": logo,
         "label": "Language Translation Service",
         "name": "translate",
-        "serviceSpecificConfig": {},
+        "serviceSpecificConfig": {
+            to : "string"
+        },
         "serviceSpecificConfigDefaults": {}
     },
     "formrecLayoutService": {

@@ -8,8 +8,6 @@ import { Breadcrumb } from '@fluentui/react/lib/Breadcrumb';
 import { TooltipHost } from '@fluentui/react/lib/Tooltip';
 
 
-
-
 function _getCustomDivider(dividerProps) {
     const tooltipText = dividerProps.item ? dividerProps.item.text : '';
     return (
@@ -23,8 +21,6 @@ function _getCustomDivider(dividerProps) {
 
 
 export default function Content(props) {
-
-
 
     const [selectedMenuItem, setSelectedMenuItem] = useState("HOME");
     const [breadCrumbItems, setBreadCrumbItems] = useState([])
@@ -40,19 +36,19 @@ export default function Content(props) {
             case 'configure-pipeline':
                 setSelectedMenuItem('CONFIGURE_PIPELINE')
                 breadCrumbItems.push({ text: 'Home', key: 'home', onClick: onBreadcrumbHome })
-                breadCrumbItems.push({ text: 'Configure Pipeline', key: 'config-pipeline', onClick: onBreadcrumbHome })
+                breadCrumbItems.push({ text: 'Configure Pipeline', key: 'config-pipeline' })
                 setBreadCrumbItems(breadCrumbItems)
                 break
             case 'view-pipeline':
                 setSelectedMenuItem('CURRENT_PIPELINE')
                 breadCrumbItems.push({ text: 'Home', key: 'home', onClick: onBreadcrumbHome })
-                breadCrumbItems.push({ text: 'View Pipeline', key: 'view-pipeline', onClick: onBreadcrumbHome })
+                breadCrumbItems.push({ text: 'View Pipeline', key: 'view-pipeline' })
                 setBreadCrumbItems(breadCrumbItems)
                 break
             case 'upload':
                 setSelectedMenuItem('UPLOAD_DOCUMENTS')
                 breadCrumbItems.push({ text: 'Home', key: 'home', onClick: onBreadcrumbHome })
-                breadCrumbItems.push({ text: 'Upload Documents', key: 'upload', onClick: onBreadcrumbHome })
+                breadCrumbItems.push({ text: 'Upload Documents', key: 'upload' })
                 setBreadCrumbItems(breadCrumbItems)
                 break
             default:
@@ -69,7 +65,7 @@ export default function Content(props) {
             case 'CONFIGURE_PIPELINE':
                 return (<Stages theme={props.theme} />)
             case 'UPLOAD_DOCUMENTS':
-                return (<Upload />)
+                return (<Upload theme={props.theme}/>)
 
             default:
                 return (<Home />)
