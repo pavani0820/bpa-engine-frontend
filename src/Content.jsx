@@ -55,6 +55,8 @@ export default function Content(props) {
                 breadCrumbItems.push({ text: 'Upload Documents', key: 'upload', onClick: onBreadcrumbHome })
                 setBreadCrumbItems(breadCrumbItems)
                 break
+            default:
+                break;
         }
     }
 

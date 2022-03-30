@@ -17,9 +17,7 @@ export default function Stages(props) {
     const [options, setOptions] = useState([])
     const [done, setDone] = useState(false)
 
-    const labelStyle = { fontFamily: props.theme.fonts.xLarge.fontFamily, fontSize: props.theme.fonts.xLarge.fontSize, color: props.theme.palette.themePrimary, paddingLeft: "20px" }
-    const labelStyleSeparator = { fontFamily: props.theme.fonts.xLarge.fontFamily, fontSize: props.theme.fonts.xLarge.fontSize, color: props.theme.palette.black, paddingLeft: "20px" }
-
+ 
     useEffect(() => {
         const getSC = async () => {
             const matchingOptions = getMatchingOptions({
