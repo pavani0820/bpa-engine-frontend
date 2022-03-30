@@ -1,6 +1,6 @@
 import pdf from './images/pdf.png'
 import logo from './images/imagetbd.png'
-import android from './images/android.svg'
+import sentiment from './images/sentimentDemoLogo.svg'
 
 export const sc = {
     "pdf": {
@@ -25,7 +25,7 @@ export const sc = {
         "outputTypes": [
             "wav"
         ],
-        "image": android,
+        "image": sentiment,
         "label": "WAV Document",
         "name": "wav",
         "serviceSpecificConfig": {},
