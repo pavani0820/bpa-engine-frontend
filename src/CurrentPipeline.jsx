@@ -6,11 +6,11 @@ import arrow from './images/arrow.png'
 
 export default function Stages() {
 
-    const [stages, setStages] = useState()
+    const [stages, setStages] = useState([])
 
     useEffect(() => {
         try {
-            axios.get('/api/config').then(value => setStages(value.stages))
+           axios.get('/api/config').then(value => setStages(value.data.stages))
         } catch (err) {
             console.log(err)
         }
