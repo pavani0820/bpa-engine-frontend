@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
-import { Button } from 'react-bootstrap'
 import PipelinePreview from './PipelinePreview'
 import OptionCard from './OptionCard';
 import _ from 'lodash'
 
 import { sc } from './serviceCatalog'
+import { PrimaryButton } from '@fluentui/react';
+import { Label } from '@fluentui/react/lib/Label';
 
 
-export default function Stages() {
+export default function Stages(props) {
 
     const [serviceCatalog] = useState(sc)
     const [stages, setStages] = useState([])
     const [value, setValue] = useState(0)
     const [options, setOptions] = useState([])
     const [done, setDone] = useState(false)
+
+    const labelStyle = { fontFamily: props.theme.fonts.xLarge.fontFamily, fontSize: props.theme.fonts.xLarge.fontSize, color: props.theme.palette.themePrimary, paddingLeft: "20px" }
+    const labelStyleSeparator = { fontFamily: props.theme.fonts.xLarge.fontFamily, fontSize: props.theme.fonts.xLarge.fontSize, color: props.theme.palette.black, paddingLeft: "20px" }
 
     useEffect(() => {
         const getSC = async () => {
@@ -81,7 +85,7 @@ export default function Stages() {
     const renderOptions = () => {
         if (options) {
             return (
-                <div style={{ display:"flex",flexWrap : "wrap", padding: "30px", overflow:"auto" }} >
+                <div style={{ display: "flex", flexWrap: "wrap", padding: "30px", overflow: "auto" }} >
                     {options.map((option, index) => {
                         return (<OptionCard option={option} onClickHandler={onItemClick} />)
                     })}
@@ -91,48 +95,24 @@ export default function Stages() {
 
     }
 
-    // const renderPipeline = () => {
-    //     if (stages) {
-    //         return (
-    //             <div style={{ display: "flex", padding: "30px", flexWrap : "wrap" }} >
-    //                 {stages.map((option, index) => {
-    //                     console.log(`index : ${index}`)
-    //                     if (index === stages.length - 1) {
-    //                         return (
-    //                             <>
-    //                                 <OptionCard option={option} />
-    //                             </>)
-    //                     } else {
-    //                         return (
-    //                             <>
-    //                                 <OptionCard option={option} />
-    //                                 <img src={arrow} alt="progress indicator" />
-    //                             </>)
-    //                     }
-    //                 })}
-    //             </div>
-    //         )
-    //     }
-    // }
-
     const renderStage = () => {
         if (done) {
             return (<>{JSON.stringify(stages)}</>)
         }
 
-        return (<>
-            <div style={{overflow:"auto"}}>
-                <h4 style={{ marginLeft: "50px", marginTop: "30px" }}>Select a stage to add it to your pipeline configuration: </h4>
+        return (
+            <div style={{ paddingLeft: "10px", paddingTop: "50px" }}>
+                <Label theme={props.theme} style={{ fontFamily: props.theme.fonts.xxLarge.fontFamily, fontSize: props.theme.fonts.xxLarge.fontSize }}>Select a stage to add it to your pipeline configuration:</Label>
                 {renderOptions(options)}
-                <h4 style={{ marginLeft: "50px" }}>Pipeline Preview: </h4>
+                <Label theme={props.theme} style={{ fontFamily: props.theme.fonts.xxLarge.fontFamily, fontSize: props.theme.fonts.xxLarge.fontSize }}>Pipeline Preview:</Label>
                 <PipelinePreview stages={stages} />
                 <div>
-                    <Button variant="primary" onClick={onDone} style={{ marginLeft: "50px" }}>Done</Button>{' '}
-                    <Button variant="primary" onClick={onResetPipeline} style={{ marginLeft: "50px" }}>Reset Pipeline</Button>{' '}
+                    <PrimaryButton onClick={onDone} style={{ margin: "50px" }} text="Done"></PrimaryButton>{' '}
+                    <PrimaryButton onClick={onResetPipeline} text="Reset Pipeline"></PrimaryButton>{' '}
                 </div>
 
             </div>
-        </>)
+        )
     }
 
     return (<>
