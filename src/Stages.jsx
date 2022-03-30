@@ -6,6 +6,7 @@ import OptionCard from './OptionCard';
 import _ from 'lodash'
 
 import { sc } from './serviceCatalog'
+import { findByLabelText } from '@testing-library/react';
 
 
 export default function Stages() {
@@ -81,7 +82,7 @@ export default function Stages() {
     const renderOptions = () => {
         if (options) {
             return (
-                <div style={{ display: "flex", padding: "30px" }} >
+                <div style={{ display:"flex",flexWrap : "wrap", padding: "30px", overflow:"auto" }} >
                     {options.map((option, index) => {
                         return (<OptionCard option={option} onClickHandler={onItemClick} />)
                     })}
@@ -94,7 +95,7 @@ export default function Stages() {
     const renderPipeline = () => {
         if (stages) {
             return (
-                <div style={{ display: "flex", padding: "30px" }} >
+                <div style={{ display: "flex", padding: "30px", flexWrap : "wrap" }} >
                     {stages.map((option, index) => {
                         console.log(`index : ${index}`)
                         if (index === stages.length - 1) {
@@ -121,16 +122,18 @@ export default function Stages() {
         }
 
         return (<>
-            <div style={{ display: "flex" }}>
-                <div style={{ flexDirection: "column" }}>
-                    <h4 style={{ marginLeft: "50px", marginTop: "30px" }}>Select a stage to add it to your pipeline configuration: </h4>
-                    {renderOptions(options)}
-                    <h4 style={{ marginLeft: "50px" }}>Pipeline Preview: </h4>
-                    {renderPipeline(stages)}
+            <div style={{overflow:"auto"}}>
+                <h4 style={{ marginLeft: "50px", marginTop: "30px" }}>Select a stage to add it to your pipeline configuration: </h4>
+                {renderOptions(options)}
+                <h4 style={{ marginLeft: "50px" }}>Pipeline Preview: </h4>
+                {renderPipeline(stages)}
+                <div>
                     <Button variant="primary" onClick={onDone} style={{ marginLeft: "50px" }}>Done</Button>{' '}
                     <Button variant="primary" onClick={onResetPipeline} style={{ marginLeft: "50px" }}>Reset Pipeline</Button>{' '}
                 </div>
+
             </div>
+
 
         </>)
     }

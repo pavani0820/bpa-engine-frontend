@@ -12,7 +12,7 @@ export default function Stages() {
         try {
             axios.get('/api/config').then(value => setStages(value.stages))
         } catch (err) {
-
+            console.log(err)
         }
 
     }, [])
@@ -55,7 +55,11 @@ export default function Stages() {
 
     } else {
         return (
-            <>No Pipeline Configured</>
+            <div style={{ display: "flex" }}>
+                <div style={{ flexDirection: "column" }}>
+                    <>No Pipeline Configured</>
+                </div>
+            </div>
         )
     }
 

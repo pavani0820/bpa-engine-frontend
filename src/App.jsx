@@ -10,7 +10,7 @@ function App({ Component, pageProps }) {
     <>
       <Header />
       <Content />
-      <Footer />
+     
     </>
   )
 }

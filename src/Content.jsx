@@ -42,13 +42,14 @@ export default function Content() {
 
     return (
         <div className="content" >
+            <div className="sidebar">
 
+            </div>
             <ProSidebar>
                 <Menu iconShape="square">
                     <MenuItem className="menuItem" onClick={() => { setSelectedMenuItem('CURRENT_PIPELINE') }}>Current Pipeline</MenuItem>
                     <MenuItem className="menuItem" onClick={() => { setSelectedMenuItem('CONFIGURE_PIPELINE') }}>Configure Pipeline</MenuItem>
                     <MenuItem className="menuItem" onClick={() => { setSelectedMenuItem('UPLOAD_DOCUMENTS') }}>Upload Documents</MenuItem>
-
                 </Menu>
             </ProSidebar>
 
