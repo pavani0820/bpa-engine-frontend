@@ -8,7 +8,7 @@ import { sc } from './serviceCatalog'
 import { PrimaryButton } from '@fluentui/react';
 import { Label } from '@fluentui/react/lib/Label';
 import { Dialog, DialogType, DialogFooter } from '@fluentui/react/lib/Dialog';
-import { Dropdown, DropdownMenuItemType, IDropdownStyles, IDropdownOption } from '@fluentui/react/lib/Dropdown';
+import { Dropdown } from '@fluentui/react/lib/Dropdown';
 
 const dropdownStyles = {
     dropdown: { width: 300 },
