@@ -6,7 +6,6 @@ import OptionCard from './OptionCard';
 import _ from 'lodash'
 
 import { sc } from './serviceCatalog'
-import { findByLabelText } from '@testing-library/react';
 
 
 export default function Stages() {
