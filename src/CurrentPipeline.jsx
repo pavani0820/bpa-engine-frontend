@@ -1,7 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import OptionCard from "./OptionCard"
-import arrow from './images/arrow.png'
+import PipelinePreview from './PipelinePreview'
 
 
 export default function Stages() {
@@ -10,7 +9,7 @@ export default function Stages() {
 
     useEffect(() => {
         try {
-           axios.get('/api/config').then(value => setStages(value.data.stages))
+            axios.get('/api/config').then(value => setStages(value.data.stages))
         } catch (err) {
             console.log(err)
         }
@@ -18,50 +17,9 @@ export default function Stages() {
     }, [])
 
 
-    const renderPipeline = () => {
-        if (stages) {
-            return (
-                <div style={{ display: "flex", padding: "30px" }} >
-                    {stages.map((option, index) => {
-                        console.log(`index : ${index}`)
-                        if (index === stages.length - 1) {
-                            return (
-                                <>
-                                    <OptionCard option={option} />
-                                </>)
-                        } else {
-                            return (
-                                <>
-                                    <OptionCard option={option} />
-                                    <img src={arrow} alt="progress indicator" />
-                                </>)
-                        }
-                    })}
-                </div>
-            )
-        }
-    }
-
-
-
-    if (stages) {
-        return (
-            <div style={{ display: "flex" }}>
-                <div style={{ flexDirection: "column" }}>
-                    {renderPipeline()}
-                </div>
-            </div>
-        )
-
-    } else {
-        return (
-            <div style={{ display: "flex" }}>
-                <div style={{ flexDirection: "column" }}>
-                    <>No Pipeline Configured</>
-                </div>
-            </div>
-        )
-    }
-
-
+    return (
+        <div style={{ overflow: "auto" }}>
+            <PipelinePreview stages={stages} />
+        </div>
+    )
 }

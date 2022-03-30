@@ -1,12 +1,13 @@
 import OptionCard from "./OptionCard"
+import arrow from "./images/arrow.png"
 
 export default function PipelinePreview(props) {
     if (props.stages) {
         return (
             <div style={{ display: "flex", padding: "30px" }} >
-                {stages.map((option, index) => {
+                {props.stages.map((option, index) => {
                     console.log(`index : ${index}`)
-                    if (index === stages.length - 1) {
+                    if (index === props.stages.length - 1) {
                         return (
                             <>
                                 <OptionCard option={option} />
