@@ -29,7 +29,7 @@ const newsc = {
     "generalDocument": {
         "bpaServiceId": "abc123",
         "inputTypes": [
-            "text"
+            "pdf"
         ],
         "outputTypes": [
             "generalDocument"
@@ -40,80 +40,80 @@ const newsc = {
         "serviceSpecificConfig": {},
         "serviceSpecificConfigDefaults": {}
     },
-    "invoice": {
+    "prebuiltInvoice": {
         "bpaServiceId": "abc123",
         "inputTypes": [
-            "text"
+            "pdf"
         ],
         "outputTypes": [
-            "invoice"
+            "prebuiltInvoice"
         ],
         "image": sentiment,
         "label": "Form Recognizer Prebuilt Invoice Model",
-        "name": "invoice",
+        "name": "prebuiltInvoice",
         "serviceSpecificConfig": {},
         "serviceSpecificConfigDefaults": {}
     },
-    "businessCard": {
+    "prebuiltBusinessCard": {
         "bpaServiceId": "abc123",
         "inputTypes": [
-            "text"
+            "pdf"
         ],
         "outputTypes": [
-            "businessCard"
+            "prebuiltBusinessCard"
         ],
         "image": sentiment,
         "label": "Form Recognizer Prebuilt Business Card Model",
-        "name": "businessCard",
+        "name": "prebuiltBusinessCard",
         "serviceSpecificConfig": {},
         "serviceSpecificConfigDefaults": {}
     },
-    "identity": {
+    "prebuiltIdentity": {
         "bpaServiceId": "abc123",
         "inputTypes": [
-            "text"
+            "pdf"
         ],
         "outputTypes": [
-            "identity"
+            "prebuiltIdentity"
         ],
         "image": sentiment,
         "label": "Form Recognizer Prebuilt ID Model",
-        "name": "identity",
+        "name": "prebuiltIdentity",
         "serviceSpecificConfig": {},
         "serviceSpecificConfigDefaults": {}
     },
-    "receipt": {
+    "prebuiltReceipt": {
         "bpaServiceId": "abc123",
         "inputTypes": [
-            "text"
+            "pdf"
         ],
         "outputTypes": [
-            "receipt"
+            "prebuiltReceipt"
         ],
         "image": sentiment,
         "label": "Form Recognizer Receipt ID Model",
-        "name": "receipt",
+        "name": "prebuiltReceipt",
         "serviceSpecificConfig": {},
         "serviceSpecificConfigDefaults": {}
     },
-    "tax": {
+    "prebuiltTaxW2": {
         "bpaServiceId": "abc123",
         "inputTypes": [
-            "text"
+            "pdf"
         ],
         "outputTypes": [
-            "tax"
+            "prebuiltTaxW2"
         ],
         "image": sentiment,
         "label": "Form Recognizer Tax-W2 ID Model",
-        "name": "tax",
+        "name": "prebuiltTaxW2",
         "serviceSpecificConfig": {},
         "serviceSpecificConfigDefaults": {}
     },
     "customFormRec": {
         "bpaServiceId": "abc123",
         "inputTypes": [
-            "text"
+            "pdf"
         ],
         "outputTypes": [
             "customFormRec"
@@ -124,101 +124,115 @@ const newsc = {
         "serviceSpecificConfig": {},
         "serviceSpecificConfigDefaults": {}
     },
-    "languagePii": {
+    "recognizePiiEntities": {
         "bpaServiceId": "abc123",
         "inputTypes": [
             "text"
         ],
         "outputTypes": [
-            "languagePii"
+            "recognizePiiEntities"
         ],
         "image": sentiment,
         "label": "Language Studio PII Model",
-        "name": "languagePii",
+        "name": "recognizePiiEntities",
         "serviceSpecificConfig": {},
         "serviceSpecificConfigDefaults": {}
     },
-    "languageKeyPhrases": {
+    "extractKeyPhrases": {
         "bpaServiceId": "abc123",
         "inputTypes": [
             "text"
         ],
         "outputTypes": [
-            "languageKeyPhrases"
+            "extractKeyPhrases"
         ],
         "image": sentiment,
         "label": "Language Studio Key Phrases Model",
-        "name": "languageKeyPhrases",
+        "name": "extractKeyPhrases",
         "serviceSpecificConfig": {},
         "serviceSpecificConfigDefaults": {}
     },
-    "languageLinkedEntities": {
+    "recognizeLinkedEntities": {
         "bpaServiceId": "abc123",
         "inputTypes": [
             "text"
         ],
         "outputTypes": [
-            "languageLinkedEntities"
+            "recognizeLinkedEntities"
         ],
         "image": sentiment,
         "label": "Language Studio Linked Entities Model",
-        "name": "languageLinkedEntities",
+        "name": "recognizeLinkedEntities",
         "serviceSpecificConfig": {},
         "serviceSpecificConfigDefaults": {}
     },
-    "languageSentiment": {
+    "analyzeSentiment": {
         "bpaServiceId": "abc123",
         "inputTypes": [
             "text"
         ],
         "outputTypes": [
-            "languageSentiment"
+            "analyzeSentiment"
         ],
         "image": sentiment,
         "label": "Language Studio Sentiment Model",
-        "name": "languageSentiment",
+        "name": "analyzeSentiment",
         "serviceSpecificConfig": {},
         "serviceSpecificConfigDefaults": {}
     },
-    "languageCustomEntities": {
+    "recognizeCustomEntities": {
         "bpaServiceId": "abc123",
         "inputTypes": [
             "text"
         ],
         "outputTypes": [
-            "languageCustomEntities"
+            "recognizeCustomEntities"
         ],
         "image": sentiment,
         "label": "Language Studio Custom NER Model",
-        "name": "languageCustomEntities",
+        "name": "recognizeCustomEntities",
         "serviceSpecificConfig": {},
         "serviceSpecificConfigDefaults": {}
     },
-    "languageSingleClassify": {
+    "singleCategoryClassify": {
         "bpaServiceId": "abc123",
         "inputTypes": [
             "text"
         ],
         "outputTypes": [
-            "languageSingleClassify"
+            "singleCategoryClassify"
         ],
         "image": sentiment,
         "label": "Language Studio Classify Single Class Model",
-        "name": "languageSingleClassify",
+        "name": "singleCategoryClassify",
         "serviceSpecificConfig": {},
         "serviceSpecificConfigDefaults": {}
     },
-    "languageMultiClassify": {
+    "multiCategoryClassify": {
         "bpaServiceId": "abc123",
         "inputTypes": [
             "text"
         ],
         "outputTypes": [
-            "languageMultiClassify"
+            "multiCategoryClassify"
         ],
         "image": sentiment,
         "label": "Language Studio Classify Mulitiple Classes Model",
-        "name": "languageMultiClassify",
+        "name": "multiCategoryClassify",
+        "serviceSpecificConfig": {},
+        "serviceSpecificConfigDefaults": {}
+    },
+    "recognizeEntities": {
+        "bpaServiceId": "abc123",
+        "inputTypes": [
+            "text"
+        ],
+        "outputTypes": [
+            "recognizeEntities"
+        ],
+        "image": sentiment,
+        "label": "Language Studio Classify Mulitiple Classes Model",
+        "name": "recognizeEntities",
         "serviceSpecificConfig": {},
         "serviceSpecificConfigDefaults": {}
     }
