@@ -6,8 +6,6 @@ import {
 } from '@fluentui/react/lib/DocumentCard';
 import { ImageFit } from '@fluentui/react/lib/Image';
 
-import tts from './images/textToSpeech.svg'
-
 export default function OptionCard(props) {
 
     const previewProps = {
