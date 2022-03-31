@@ -245,7 +245,6 @@ export default function Stages(props) {
     const [stages, setStages] = useState([])
     const [value, setValue] = useState(0)
     const [options, setOptions] = useState([])
-    const [done, setDone] = useState(false)
     const [hideTranslateDialog, setHideTranslateDialog] = useState(true)
     const [selectedLanguage, setSelectedLanguage] = useState(null)
     const [currentOption, setCurrentOption] = useState(null)
@@ -269,7 +268,6 @@ export default function Stages(props) {
         try{
             setOptions([])
             await axios.post('/api/config', { stages: stages.slice(1, stages.length), id: "1" })
-            setDone(true)
             props.onSelectContent("CURRENT_PIPELINE")
         } catch(err) {
             console.log(err)
