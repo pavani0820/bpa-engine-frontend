@@ -13,7 +13,7 @@ function Upload(props) {
     const [showFail, setShowFail] = useState(false);
 
     const labelStyle = { fontFamily: props.theme.fonts.xxLarge.fontFamily, fontSize: props.theme.fonts.xxLarge.fontSize, paddingLeft: "20px" }
-    const smallLabelStyle = { fontFamily: props.theme.fonts.xLarge.fontFamily, fontSize: props.theme.fonts.xLarge.fontSize, padding: "20px", width:"600px" }
+    const smallLabelStyle = { fontFamily: props.theme.fonts.xLarge.fontFamily, fontSize: props.theme.fonts.xLarge.fontSize, padding: "20px", width:"1000px" }
 
 
 
@@ -46,9 +46,9 @@ function Upload(props) {
     return (
         <div style={{ paddingLeft: "10px", paddingTop: "50px" }}>
             <Label style={labelStyle}>Upload a document to Blob Storage</Label>
-            <Label style={smallLabelStyle}>Before any insights can be viewed by a pattern, one or more documents must be uploaded.  The documents will be copied to Blob Storage which will trigger a Function App to process them.  The processing can take some time and the insights will not appear immediately.</Label>
+            <p style={smallLabelStyle}>Before any insights can be viewed by a pattern, one or more documents must be uploaded.  The documents will be copied to Blob Storage which will trigger a Function App to process them.  The processing can take some time and the insights will not appear immediately.</p>
             <div style={{padding:"20px"}}>
-                <FileUploader handleChange={handleChange} name="file" types={fileTypes} />
+                <FileUploader styles={smallLabelStyle} handleChange={handleChange} name="file" types={fileTypes} />
             </div>
             
 

@@ -33,22 +33,22 @@ export default function Content(props) {
     const onSelectContent = (content) => {
         console.log(content.currentTarget.id)
         switch (content.currentTarget.id) {
-            case 'configure-pipeline':
+            case 'CONFIGURE_PIPELINE':
                 setSelectedMenuItem('CONFIGURE_PIPELINE')
                 breadCrumbItems.push({ text: 'Home', key: 'home', onClick: onBreadcrumbHome })
-                breadCrumbItems.push({ text: 'Configure Pipeline', key: 'config-pipeline' })
+                breadCrumbItems.push({ text: 'Configure Pipeline', key: 'CONFIGURE_PIPELINE' })
                 setBreadCrumbItems(breadCrumbItems)
                 break
-            case 'view-pipeline':
+            case 'CURRENT_PIPELINE':
                 setSelectedMenuItem('CURRENT_PIPELINE')
                 breadCrumbItems.push({ text: 'Home', key: 'home', onClick: onBreadcrumbHome })
-                breadCrumbItems.push({ text: 'View Pipeline', key: 'view-pipeline' })
+                breadCrumbItems.push({ text: 'View Pipeline', key: 'CURRENT_PIPELINE' })
                 setBreadCrumbItems(breadCrumbItems)
                 break
-            case 'upload':
+            case 'UPLOAD_DOCUMENTS':
                 setSelectedMenuItem('UPLOAD_DOCUMENTS')
                 breadCrumbItems.push({ text: 'Home', key: 'home', onClick: onBreadcrumbHome })
-                breadCrumbItems.push({ text: 'Upload Documents', key: 'upload' })
+                breadCrumbItems.push({ text: 'Upload Documents', key: 'UPLOAD_DOCUMENTS' })
                 setBreadCrumbItems(breadCrumbItems)
                 break
             default:
@@ -63,7 +63,7 @@ export default function Content(props) {
             case 'CURRENT_PIPELINE':
                 return (<CurrentPipeline theme={props.theme} />)
             case 'CONFIGURE_PIPELINE':
-                return (<Stages theme={props.theme} />)
+                return (<Stages theme={props.theme} onSelectContent={onSelectContent} />)
             case 'UPLOAD_DOCUMENTS':
                 return (<Upload theme={props.theme}/>)
 

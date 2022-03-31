@@ -265,10 +265,16 @@ export default function Stages(props) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    const onDone = (event) => {
-        setOptions([])
-        setDone(true)
-        axios.post('/api/config', { stages: stages.slice(1, stages.length), id: "1" })
+    const onDone = async () => {
+        try{
+            setOptions([])
+            await axios.post('/api/config', { stages: stages.slice(1, stages.length), id: "1" })
+            setDone(true)
+            props.onSelectContent("CURRENT_PIPELINE")
+        } catch(err) {
+            console.log(err)
+        }
+
     }
 
     const getMatchingOptions = (previousStage, allowAny) => {
@@ -421,10 +427,6 @@ export default function Stages(props) {
     }
 
     const renderStage = () => {
-        if (done) {
-            return (<>{JSON.stringify(stages)}</>)
-        }
-
         return (
             <div style={{ paddingLeft: "10px", paddingTop: "50px" }}>
                 {renderStageTop()}

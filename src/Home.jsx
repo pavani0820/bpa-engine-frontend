@@ -9,11 +9,11 @@ export default function Home(props){
         <div style={{paddingLeft : "10px", paddingTop : "100px"}}>
             <Label theme={props.theme} style={{fontFamily:props.theme.fonts.xxLarge.fontFamily, fontSize:props.theme.fonts.xxLarge.fontSize}}>What would you like to do?</Label>
             <div style={{display:"flex", paddingTop : "100px"}}>
-                <Label id="configure-pipeline" onClick={(e)=>props.onClick(e)} style={labelStyle}>Configure A New Pipeline</Label>
+                <Label id="CONFIGURE_PIPELINE" onClick={(e)=>props.onClick(e)} style={labelStyle}>Configure A New Pipeline</Label>
                 <Label style={labelStyleSeparator}>|</Label>
-                <Label id="view-pipeline" onClick={(e)=>props.onClick(e)} style={labelStyle}>View The Existing Pipeline</Label>
+                <Label id="CURRENT_PIPELINE" onClick={(e)=>props.onClick(e)} style={labelStyle}>View The Existing Pipeline</Label>
                 <Label style={labelStyleSeparator}>|</Label>
-                <Label id="upload" onClick={(e)=>props.onClick(e)} style={labelStyle}>Ingest Documents</Label>
+                <Label id="UPLOAD_DOCUMENTS" onClick={(e)=>props.onClick(e)} style={labelStyle}>Ingest Documents</Label>
                 <Label style={labelStyleSeparator}>|</Label>
                 <Label id="insights" onClick={(e)=>props.onClick(e)} style={labelStyle}>View Insights</Label>
             </div>
