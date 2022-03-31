@@ -266,9 +266,10 @@ export default function Stages(props) {
 
     const onDone = async () => {
         try{
+            props.onSelectContent({currentTarget : {id : "CURRENT_PIPELINE"}})
             setOptions([])
             await axios.post('/api/config', { stages: stages.slice(1, stages.length), id: "1" })
-            props.onSelectContent("CURRENT_PIPELINE")
+            
         } catch(err) {
             console.log(err)
         }
