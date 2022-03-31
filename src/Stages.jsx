@@ -10,6 +10,8 @@ import { Label } from '@fluentui/react/lib/Label';
 import { Dialog, DialogType, DialogFooter } from '@fluentui/react/lib/Dialog';
 import { Dropdown } from '@fluentui/react/lib/Dropdown';
 
+import sentiment from './images/sentimentDemoLogo.svg'
+
 const dropdownStyles = {
     dropdown: { width: 300 },
 };
@@ -21,9 +23,211 @@ const languages = [
     { key: 'fr', text: 'French' },
 ];
 
+
+const newsc = {
+    ...sc,
+    "generalDocument": {
+        "bpaServiceId": "abc123",
+        "inputTypes": [
+            "text"
+        ],
+        "outputTypes": [
+            "generalDocument"
+        ],
+        "image": sentiment,
+        "label": "Form Recognizer General Document Model",
+        "name": "generalDocument",
+        "serviceSpecificConfig": {},
+        "serviceSpecificConfigDefaults": {}
+    },
+    "invoice": {
+        "bpaServiceId": "abc123",
+        "inputTypes": [
+            "text"
+        ],
+        "outputTypes": [
+            "invoice"
+        ],
+        "image": sentiment,
+        "label": "Form Recognizer Prebuilt Invoice Model",
+        "name": "invoice",
+        "serviceSpecificConfig": {},
+        "serviceSpecificConfigDefaults": {}
+    },
+    "businessCard": {
+        "bpaServiceId": "abc123",
+        "inputTypes": [
+            "text"
+        ],
+        "outputTypes": [
+            "businessCard"
+        ],
+        "image": sentiment,
+        "label": "Form Recognizer Prebuilt Business Card Model",
+        "name": "businessCard",
+        "serviceSpecificConfig": {},
+        "serviceSpecificConfigDefaults": {}
+    },
+    "identity": {
+        "bpaServiceId": "abc123",
+        "inputTypes": [
+            "text"
+        ],
+        "outputTypes": [
+            "identity"
+        ],
+        "image": sentiment,
+        "label": "Form Recognizer Prebuilt ID Model",
+        "name": "identity",
+        "serviceSpecificConfig": {},
+        "serviceSpecificConfigDefaults": {}
+    },
+    "receipt": {
+        "bpaServiceId": "abc123",
+        "inputTypes": [
+            "text"
+        ],
+        "outputTypes": [
+            "receipt"
+        ],
+        "image": sentiment,
+        "label": "Form Recognizer Receipt ID Model",
+        "name": "receipt",
+        "serviceSpecificConfig": {},
+        "serviceSpecificConfigDefaults": {}
+    },
+    "tax": {
+        "bpaServiceId": "abc123",
+        "inputTypes": [
+            "text"
+        ],
+        "outputTypes": [
+            "tax"
+        ],
+        "image": sentiment,
+        "label": "Form Recognizer Tax-W2 ID Model",
+        "name": "tax",
+        "serviceSpecificConfig": {},
+        "serviceSpecificConfigDefaults": {}
+    },
+    "customFormRec": {
+        "bpaServiceId": "abc123",
+        "inputTypes": [
+            "text"
+        ],
+        "outputTypes": [
+            "customFormRec"
+        ],
+        "image": sentiment,
+        "label": "Form Recognizer Custom Model",
+        "name": "customFormRec",
+        "serviceSpecificConfig": {},
+        "serviceSpecificConfigDefaults": {}
+    },
+    "languagePii": {
+        "bpaServiceId": "abc123",
+        "inputTypes": [
+            "text"
+        ],
+        "outputTypes": [
+            "languagePii"
+        ],
+        "image": sentiment,
+        "label": "Language Studio PII Model",
+        "name": "languagePii",
+        "serviceSpecificConfig": {},
+        "serviceSpecificConfigDefaults": {}
+    },
+    "languageKeyPhrases": {
+        "bpaServiceId": "abc123",
+        "inputTypes": [
+            "text"
+        ],
+        "outputTypes": [
+            "languageKeyPhrases"
+        ],
+        "image": sentiment,
+        "label": "Language Studio Key Phrases Model",
+        "name": "languageKeyPhrases",
+        "serviceSpecificConfig": {},
+        "serviceSpecificConfigDefaults": {}
+    },
+    "languageLinkedEntities": {
+        "bpaServiceId": "abc123",
+        "inputTypes": [
+            "text"
+        ],
+        "outputTypes": [
+            "languageLinkedEntities"
+        ],
+        "image": sentiment,
+        "label": "Language Studio Linked Entities Model",
+        "name": "languageLinkedEntities",
+        "serviceSpecificConfig": {},
+        "serviceSpecificConfigDefaults": {}
+    },
+    "languageSentiment": {
+        "bpaServiceId": "abc123",
+        "inputTypes": [
+            "text"
+        ],
+        "outputTypes": [
+            "languageSentiment"
+        ],
+        "image": sentiment,
+        "label": "Language Studio Sentiment Model",
+        "name": "languageSentiment",
+        "serviceSpecificConfig": {},
+        "serviceSpecificConfigDefaults": {}
+    },
+    "languageCustomEntities": {
+        "bpaServiceId": "abc123",
+        "inputTypes": [
+            "text"
+        ],
+        "outputTypes": [
+            "languageCustomEntities"
+        ],
+        "image": sentiment,
+        "label": "Language Studio Custom NER Model",
+        "name": "languageCustomEntities",
+        "serviceSpecificConfig": {},
+        "serviceSpecificConfigDefaults": {}
+    },
+    "languageSingleClassify": {
+        "bpaServiceId": "abc123",
+        "inputTypes": [
+            "text"
+        ],
+        "outputTypes": [
+            "languageSingleClassify"
+        ],
+        "image": sentiment,
+        "label": "Language Studio Classify Single Class Model",
+        "name": "languageSingleClassify",
+        "serviceSpecificConfig": {},
+        "serviceSpecificConfigDefaults": {}
+    },
+    "languageMultiClassify": {
+        "bpaServiceId": "abc123",
+        "inputTypes": [
+            "text"
+        ],
+        "outputTypes": [
+            "languageMultiClassify"
+        ],
+        "image": sentiment,
+        "label": "Language Studio Classify Mulitiple Classes Model",
+        "name": "languageMultiClassify",
+        "serviceSpecificConfig": {},
+        "serviceSpecificConfigDefaults": {}
+    }
+
+}
+
 export default function Stages(props) {
 
-    const [serviceCatalog] = useState(sc)
+    const [serviceCatalog] = useState(newsc)
     const [stages, setStages] = useState([])
     const [value, setValue] = useState(0)
     const [options, setOptions] = useState([])
@@ -108,7 +312,7 @@ export default function Stages(props) {
         if (options) {
             return (
                 <div style={{ display: "flex", flexWrap: "wrap", padding: "30px", overflow: "auto" }} >
-                    {options.map((option, index) => {
+                    {options.map((option) => {
                         return (<OptionCard option={option} onClickHandler={onItemClick} />)
                     })}
                 </div>
@@ -159,13 +363,9 @@ export default function Stages(props) {
 
     }
 
-    const renderStage = () => {
-        if (done) {
-            return (<>{JSON.stringify(stages)}</>)
-        }
-
+    const renderStageTop = () => {
         return (
-            <div style={{ paddingLeft: "10px", paddingTop: "50px" }}>
+            <>
                 <Dialog
                     hidden={hideTranslateDialog}
                     onDismiss={toggleHideDialog}
@@ -186,12 +386,35 @@ export default function Stages(props) {
                 </Dialog>
                 <Label theme={props.theme} style={{ fontFamily: props.theme.fonts.xxLarge.fontFamily, fontSize: props.theme.fonts.xxLarge.fontSize }}>Select a stage to add it to your pipeline configuration:</Label>
                 {renderOptions(options)}
-                <Label theme={props.theme} style={{ fontFamily: props.theme.fonts.xxLarge.fontFamily, fontSize: props.theme.fonts.xxLarge.fontSize }}>Pipeline Preview:</Label>
-                <PipelinePreview stages={stages} />
-                <div>
-                    <PrimaryButton onClick={onDone} style={{ margin: "50px" }} text="Done"></PrimaryButton>{' '}
-                    <PrimaryButton onClick={onResetPipeline} text="Reset Pipeline"></PrimaryButton>{' '}
-                </div>
+            </>
+        )
+    }
+
+    const renderStageBottom = () => {
+        if(stages && stages.length > 0){
+            return (
+                <>
+                    <Label theme={props.theme} style={{ fontFamily: props.theme.fonts.xxLarge.fontFamily, fontSize: props.theme.fonts.xxLarge.fontSize }}>Pipeline Preview:</Label>
+                    <PipelinePreview stages={stages} />
+                    <div>
+                        <PrimaryButton onClick={onDone} style={{ margin: "50px" }} text="Done"></PrimaryButton>{' '}
+                        <PrimaryButton onClick={onResetPipeline} text="Reset Pipeline"></PrimaryButton>{' '}
+                    </div>
+                </>
+            )
+        }
+        
+    }
+
+    const renderStage = () => {
+        if (done) {
+            return (<>{JSON.stringify(stages)}</>)
+        }
+
+        return (
+            <div style={{ paddingLeft: "10px", paddingTop: "50px" }}>
+                {renderStageTop()}
+                {renderStageBottom()}
             </div>
         )
     }

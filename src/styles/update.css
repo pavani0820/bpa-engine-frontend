@@ -1,4 +1,8 @@
-.header {
+body {
+    padding: 0;
+    margin: 0;
+  }
+  .header {
     padding: 20px; 
   }
 
