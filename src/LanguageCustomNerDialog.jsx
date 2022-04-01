@@ -1,11 +1,12 @@
 import React, {useState} from 'react'
 import { Dialog, DialogType, DialogFooter } from '@fluentui/react/lib/Dialog';
-import { PrimaryButton, TextField } from '@fluentui/react';
+import { PrimaryButton, TextField, Label } from '@fluentui/react';
 
 
-export default function FormRecCustomDialog(props) {
+export default function LanguageCustomNerDialog(props) {
 
-    const [modelId, setModelId] = useState(null)
+    const [projectName, setProjectName] = useState(null)
+    const [deploymentName, setDeploymentName] = useState(null)
 
     const toggleHideDialog = () => {
         props.setHideDialog(!props.hideDialog)
@@ -13,8 +14,8 @@ export default function FormRecCustomDialog(props) {
 
     const dialogContentProps = {
         type: DialogType.largeHeader,
-        title: 'Model ID',
-        subText: 'Enter the Form Recognizer Custom Model ID',
+        title: 'Custom NER Information',
+        subText: 'Enter the Project and Deployment Name for your custom model',
     };
 
     const modalProps = {
@@ -25,17 +26,21 @@ export default function FormRecCustomDialog(props) {
     const onDialogSave = (event) => {
         console.log(event)
         const newOption = props.currentOption
-        newOption.serviceSpecificConfig = { modelId: modelId }
+        newOption.serviceSpecificConfig = { projectName: projectName, deploymentName: deploymentName }
         props.setHideDialog(true)
         props.addItemToPipeline(newOption)
     }
 
-    const onDialogCancel = (event) => {
+    const onDialogCancel = () => {
         props.setHideDialog(true)
     }
 
-    const onDialogChange = (event, newValue) => {
-        setModelId(newValue)
+    const onProjectNameDialogChange = (event, newValue) => {
+        setProjectName(newValue)
+    }
+
+    const onDeploymentNameDialogChange = (event, newValue) => {
+        setDeploymentName(newValue)
     }
 
 
@@ -46,7 +51,10 @@ export default function FormRecCustomDialog(props) {
             dialogContentProps={dialogContentProps}
             modalProps={modalProps}
         >
-            <TextField value={modelId} onChange={onDialogChange}/>
+            <Label>Project Name</Label>
+            <TextField value={projectName} onChange={onProjectNameDialogChange}/>
+            <Label>Deployment Name</Label>
+            <TextField value={deploymentName} onChange={onDeploymentNameDialogChange}/>
             <DialogFooter>
                 <PrimaryButton onClick={onDialogSave} text="Save" />
                 <PrimaryButton onClick={onDialogCancel} text="Cancel" />

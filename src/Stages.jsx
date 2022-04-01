@@ -9,6 +9,7 @@ import { PrimaryButton } from '@fluentui/react';
 import { Label } from '@fluentui/react/lib/Label';
 import LanguageDialog from './LanguageDialog';
 import FormRecCustomDialog from './FormRecCustomDialog';
+import LanguageCustomNerDialog from './LanguageCustomNerDialog';
 
 
 export default function Stages(props) {
@@ -19,6 +20,7 @@ export default function Stages(props) {
     const [options, setOptions] = useState([])
     const [hideTranslateDialog, setHideTranslateDialog] = useState(true)
     const [hideFormRecDialog, setHideFormRecDialog] = useState(true)
+    const [hideCustomNerDialog, setHideCustomNerDialog] = useState(true)
 
     const [currentOption, setCurrentOption] = useState(null)
 
@@ -95,10 +97,12 @@ export default function Stages(props) {
             setCurrentOption(_.cloneDeep(event))
             setHideTranslateDialog(false)
         } else if (event.name === 'customFormRec'){
-            console.log("here")
             setCurrentOption(_.cloneDeep(event))
             setHideFormRecDialog(false)
-        } else {
+        } else if (event.name === 'recognizeCustomEntities'){
+            setCurrentOption(_.cloneDeep(event))
+            setHideCustomNerDialog(false)
+        }else {
             addItemToPipeline(event)
         }
 
@@ -119,6 +123,7 @@ export default function Stages(props) {
     const renderStageTop = () => {
         return (
             <>
+                <LanguageCustomNerDialog hideDialog={hideCustomNerDialog} setHideDialog={setHideCustomNerDialog} currentOption={currentOption} addItemToPipeline={addItemToPipeline} />
                 <FormRecCustomDialog hideDialog={hideFormRecDialog} setHideDialog={setHideFormRecDialog} currentOption={currentOption} addItemToPipeline={addItemToPipeline} />
                 <LanguageDialog hideDialog={hideTranslateDialog} setHideDialog={setHideTranslateDialog} currentOption={currentOption} addItemToPipeline={addItemToPipeline} />
                 <Label theme={props.theme} style={{ fontFamily: props.theme.fonts.xxLarge.fontFamily, fontSize: props.theme.fonts.xxLarge.fontSize }}>Select a stage to add it to your pipeline configuration</Label>
