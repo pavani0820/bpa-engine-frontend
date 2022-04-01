@@ -10,6 +10,8 @@ import { Label } from '@fluentui/react/lib/Label';
 import LanguageDialog from './LanguageDialog';
 import FormRecCustomDialog from './FormRecCustomDialog';
 import LanguageCustomNerDialog from './LanguageCustomNerDialog';
+import LanguageMultiClassifyDialog from './LanguageMultiClassifyDialog';
+import LanguageSingleClassifyDialog from './LanguageSingleClassifyDialog'
 
 
 export default function Stages(props) {
@@ -21,6 +23,8 @@ export default function Stages(props) {
     const [hideTranslateDialog, setHideTranslateDialog] = useState(true)
     const [hideFormRecDialog, setHideFormRecDialog] = useState(true)
     const [hideCustomNerDialog, setHideCustomNerDialog] = useState(true)
+    const [hideCustomSingleDialog, setHideCustomSingleDialog] = useState(true)
+    const [hideCustomMultiDialog, setHideCustomMultiDialog] = useState(true)
 
     const [currentOption, setCurrentOption] = useState(null)
 
@@ -102,6 +106,12 @@ export default function Stages(props) {
         } else if (event.name === 'recognizeCustomEntities'){
             setCurrentOption(_.cloneDeep(event))
             setHideCustomNerDialog(false)
+        }else if (event.name === 'singleCategoryClassify'){
+            setCurrentOption(_.cloneDeep(event))
+            setHideCustomSingleDialog(false)
+        }else if (event.name === 'multiCategoryClassify'){
+            setCurrentOption(_.cloneDeep(event))
+            setHideCustomMultiDialog(false)
         }else {
             addItemToPipeline(event)
         }
@@ -123,6 +133,8 @@ export default function Stages(props) {
     const renderStageTop = () => {
         return (
             <>
+                <LanguageSingleClassifyDialog hideDialog={hideCustomSingleDialog} setHideDialog={setHideCustomSingleDialog} currentOption={currentOption} addItemToPipeline={addItemToPipeline} />
+                <LanguageMultiClassifyDialog hideDialog={hideCustomMultiDialog} setHideDialog={setHideCustomMultiDialog} currentOption={currentOption} addItemToPipeline={addItemToPipeline} />
                 <LanguageCustomNerDialog hideDialog={hideCustomNerDialog} setHideDialog={setHideCustomNerDialog} currentOption={currentOption} addItemToPipeline={addItemToPipeline} />
                 <FormRecCustomDialog hideDialog={hideFormRecDialog} setHideDialog={setHideFormRecDialog} currentOption={currentOption} addItemToPipeline={addItemToPipeline} />
                 <LanguageDialog hideDialog={hideTranslateDialog} setHideDialog={setHideTranslateDialog} currentOption={currentOption} addItemToPipeline={addItemToPipeline} />
