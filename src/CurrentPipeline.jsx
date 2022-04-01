@@ -19,9 +19,9 @@ export default function Stages(props) {
 
 
     return (
-        <div style={{ paddingLeft: "10px", paddingTop: "50px" }}>
-            <Label theme={props.theme} style={{ fontFamily: props.theme.fonts.xxLarge.fontFamily, fontSize: props.theme.fonts.xxLarge.fontSize }}>Current Pipeline</Label>
-            <PipelinePreview stages={stages} />
+        <div style={{ paddingLeft: "0px", paddingTop: "50px" }}>
+            <Label theme={props.theme} style={{ fontFamily: props.theme.fonts.xLarge.fontFamily, fontSize: props.theme.fonts.xLarge.fontSize }}>Current Pipeline</Label>
+            <PipelinePreview theme={props.theme} stages={stages} />
         </div>
     )
 }

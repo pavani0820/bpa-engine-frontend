@@ -184,7 +184,7 @@ export default function Stages(props) {
                         <PrimaryButton onClick={onDialogCancel} text="Cancel" />
                     </DialogFooter>
                 </Dialog>
-                <Label theme={props.theme} style={{ fontFamily: props.theme.fonts.xxLarge.fontFamily, fontSize: props.theme.fonts.xxLarge.fontSize }}>Select a stage to add it to your pipeline configuration</Label>
+                <Label theme={props.theme} style={{ fontFamily: props.theme.fonts.xLarge.fontFamily, fontSize: props.theme.fonts.xLarge.fontSize }}>Select a stage to add it to your pipeline configuration</Label>
                 {renderOptions(options)}
             </>
         )
@@ -194,10 +194,10 @@ export default function Stages(props) {
         if(stages && stages.length > 0){
             return (
                 <>
-                    <Label theme={props.theme} style={{ fontFamily: props.theme.fonts.xxLarge.fontFamily, fontSize: props.theme.fonts.xxLarge.fontSize }}>Pipeline Preview</Label>
+                    <Label theme={props.theme} style={{ fontFamily: props.theme.fonts.xLarge.fontFamily, fontSize: props.theme.fonts.xLarge.fontSize }}>Pipeline Preview</Label>
                     <PipelinePreview stages={stages} />
                     <div>
-                        <PrimaryButton onClick={onDone} style={{ margin: "50px" }} text="Done"></PrimaryButton>{' '}
+                        <PrimaryButton onClick={onDone} style={{ marginRight: "5px", marginBottom: "50px" }} text="Done"></PrimaryButton>{' '}
                         <PrimaryButton onClick={onResetPipeline} text="Reset Pipeline"></PrimaryButton>{' '}
                     </div>
                 </>
