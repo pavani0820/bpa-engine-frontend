@@ -333,19 +333,5 @@ export const sc = {
         "name": "multiCategoryClassify",
         "serviceSpecificConfig": {},
         "serviceSpecificConfigDefaults": {}
-    },
-    "recognizeEntities": {
-        "bpaServiceId": "abc123",
-        "inputTypes": [
-            "text"
-        ],
-        "outputTypes": [
-            "recognizeEntities"
-        ],
-        "image": sentiment,
-        "label": "Language Studio Classify Mulitiple Classes Model",
-        "name": "recognizeEntities",
-        "serviceSpecificConfig": {},
-        "serviceSpecificConfigDefaults": {}
     }
 }
