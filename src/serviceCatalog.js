@@ -95,7 +95,7 @@ export const sc = {
         "serviceSpecificConfig": {},
         "serviceSpecificConfigDefaults": {}
     },
-    "summarizeService": {
+    "extractSummary": {
         "inputTypes": [
             "text"
         ],
@@ -104,7 +104,7 @@ export const sc = {
         ],
         "image": summarize,
         "label": "Language Studio Text Summarization",
-        "name": "summarize",
+        "name": "extractSummary",
         "bpaServiceId": "abc123",
         "serviceSpecificConfig": {},
         "serviceSpecificConfigDefaults": {}
