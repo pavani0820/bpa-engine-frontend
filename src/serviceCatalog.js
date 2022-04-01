@@ -109,16 +109,16 @@ export const sc = {
         "serviceSpecificConfig": {},
         "serviceSpecificConfigDefaults": {}
     },
-    "languageNerService": {
+    "recognizeEntities": {
         "inputTypes": [
             "text"
         ],
         "outputTypes": [
-            "languageNer"
+            "recognizeEntities"
         ],
         "image": ner,
         "label": "Language Studio Named Entity Recognition",
-        "name": "languageNer",
+        "name": "recognizeEntities",
         "bpaServiceId": "abc123",
         "serviceSpecificConfig": {},
         "serviceSpecificConfigDefaults": {}
