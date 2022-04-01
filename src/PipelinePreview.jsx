@@ -24,8 +24,7 @@ export default function PipelinePreview(props) {
         )
     } else {
         return (<>
-            <div style={{paddingTop : "180px", paddingLeft:"30px"}}>No Configuration Found</div>
-            
+            <div style={{paddingTop : "180px", paddingLeft:"30px"}}>No Configuration Found</div> 
         </>)
     }
 }

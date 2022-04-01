@@ -20,7 +20,7 @@ export default function Stages(props) {
 
     return (
         <div style={{ paddingLeft: "10px", paddingTop: "50px" }}>
-            <Label theme={props.theme} style={{ fontFamily: props.theme.fonts.xxLarge.fontFamily, fontSize: props.theme.fonts.xxLarge.fontSize }}>Pipeline Preview:</Label>
+            <Label theme={props.theme} style={{ fontFamily: props.theme.fonts.xxLarge.fontFamily, fontSize: props.theme.fonts.xxLarge.fontSize }}>Current Pipeline</Label>
             <PipelinePreview stages={stages} />
         </div>
     )
