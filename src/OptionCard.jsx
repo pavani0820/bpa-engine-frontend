@@ -20,17 +20,25 @@ export default function OptionCard(props) {
 
     return (
         <DocumentCard
-            style={{ margin: "20px", minWidth:"100px", maxWidth:"150px" }}
+            style={{ margin: "20px", minWidth:"100px", maxWidth:"200px",minHeight:"200px", maxHeight:"200px" }}
             onClick={() => props.onClickHandler(props.option)}
         >
             <DocumentCardPreview {...previewProps} />
 
             <DocumentCardTitle
-                title={props.option.label}
+                title={props.option.label} styles={{
+                    root : {
+                        fontSize : "16px"
+                    }
+                }}
             />
-            <div style={{ margin: "15px" }}>
-                <DocumentCardDetails >These are some details that will be given about the service.</DocumentCardDetails>
-            </div>
+            {/* <div style={{ margin: "15px" }}>
+                <DocumentCardDetails styles={{
+                    root : {
+                        fontSize : "14px"
+                    }
+                }}>These are some details that will be given about the service.</DocumentCardDetails>
+            </div> */}
         </DocumentCard>
     )
 }

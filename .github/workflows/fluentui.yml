@@ -4,10 +4,7 @@ on:
   push:
     branches:
       - fluentui
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
-    branches:
-      - fluentui
+
 
 jobs:
   build_and_deploy_job:
