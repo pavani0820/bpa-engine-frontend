@@ -67,17 +67,17 @@ export const sc = {
         },
         "serviceSpecificConfigDefaults": {}
     },
-    "formrecLayoutService": {
+    "layout": {
         "bpaServiceId": "abc123",
         "inputTypes": [
             "pdf"
         ],
         "outputTypes": [
-            "formrecLayout"
+            "layout"
         ],
         "image": logo,
         "label": "Form Recognizer Layout Service",
-        "name": "formrecLayout",
+        "name": "layout",
         "serviceSpecificConfig": {},
         "serviceSpecificConfigDefaults": {}
     },
