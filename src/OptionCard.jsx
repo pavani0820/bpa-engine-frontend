@@ -2,7 +2,6 @@ import {
     DocumentCard,
     DocumentCardPreview,
     DocumentCardTitle,
-    DocumentCardDetails
 } from '@fluentui/react/lib/DocumentCard';
 import { ImageFit } from '@fluentui/react/lib/Image';
 
