@@ -1,11 +1,25 @@
-import pdf from './images/pdf.png'
-import logo from './images/imagetbd.png'
+import pdf from './images/pdf.svg'
 import sentiment from './images/sentimentDemoLogo.svg'
 import detectLanguage from './images/detectLanguageDemoLogo.svg'
 import ner from './images/nerDemoLogo.svg'
 import ocr from './images/ocrLogo.svg'
 import summarize from './images/summarizationDemoLogo.svg'
 import tts from './images/textToSpeech.svg'
+import pii from './images/piiDemoLogo.svg'
+import keyphrase from './images/keyPhrasesDemoLogo.svg'
+import linkedEntities from './images/linkedEntitiesDemoLogo.svg'
+import customNER from './images/customEntityExtractionLogo.svg'
+import customClassification from './images/customEntityExtractionLogo.svg'
+import customform from './images/customform.svg'
+import generaldoc from './images/customform.svg'
+import idcard from './images/idcard.svg'
+import invoice from './images/invoice.svg'
+import layoutLogo from './images/layoutLogo.svg'
+import receipt from './images/receiptcard.svg'
+import taxw2 from './images/taxw2.svg'
+import businesscard from './images/businesscard.svg'
+import storage from './images/storage.svg'
+import wav from './images/wav.svg'
 
 export const sc = {
     "pdf": {
@@ -30,7 +44,7 @@ export const sc = {
         "outputTypes": [
             "wav"
         ],
-        "image": sentiment,
+        "image": wav,
         "label": "WAV Document",
         "name": "wav",
         "serviceSpecificConfig": {},
@@ -75,7 +89,7 @@ export const sc = {
         "outputTypes": [
             "layout"
         ],
-        "image": logo,
+        "image": layoutLogo,
         "label": "Form Recognizer Layout Service",
         "name": "layout",
         "serviceSpecificConfig": {},
@@ -88,7 +102,7 @@ export const sc = {
         "outputTypes": [
             "any"
         ],
-        "image": logo,
+        "image": storage,
         "label": "Export Last Stage To DB",
         "name": "view",
         "bpaServiceId": "abc123",
@@ -146,7 +160,7 @@ export const sc = {
         "outputTypes": [
             "generalDocument"
         ],
-        "image": sentiment,
+        "image": generaldoc,
         "label": "Form Recognizer General Document Model",
         "name": "generalDocument",
         "serviceSpecificConfig": {},
@@ -160,7 +174,7 @@ export const sc = {
         "outputTypes": [
             "prebuiltInvoice"
         ],
-        "image": sentiment,
+        "image": invoice,
         "label": "Form Recognizer Prebuilt Invoice Model",
         "name": "prebuiltInvoice",
         "serviceSpecificConfig": {},
@@ -174,7 +188,7 @@ export const sc = {
         "outputTypes": [
             "prebuiltBusinessCard"
         ],
-        "image": sentiment,
+        "image": businesscard,
         "label": "Form Recognizer Prebuilt Business Card Model",
         "name": "prebuiltBusinessCard",
         "serviceSpecificConfig": {},
@@ -188,7 +202,7 @@ export const sc = {
         "outputTypes": [
             "prebuiltIdentity"
         ],
-        "image": sentiment,
+        "image": idcard,
         "label": "Form Recognizer Prebuilt ID Model",
         "name": "prebuiltIdentity",
         "serviceSpecificConfig": {},
@@ -202,7 +216,7 @@ export const sc = {
         "outputTypes": [
             "prebuiltReceipt"
         ],
-        "image": sentiment,
+        "image": receipt,
         "label": "Form Recognizer Receipt ID Model",
         "name": "prebuiltReceipt",
         "serviceSpecificConfig": {},
@@ -216,7 +230,7 @@ export const sc = {
         "outputTypes": [
             "prebuiltTaxW2"
         ],
-        "image": sentiment,
+        "image": taxw2,
         "label": "Form Recognizer Tax-W2 ID Model",
         "name": "prebuiltTaxW2",
         "serviceSpecificConfig": {},
@@ -230,7 +244,7 @@ export const sc = {
         "outputTypes": [
             "customFormRec"
         ],
-        "image": sentiment,
+        "image": customform,
         "label": "Form Recognizer Custom Model",
         "name": "customFormRec",
         "serviceSpecificConfig": {},
@@ -244,7 +258,7 @@ export const sc = {
         "outputTypes": [
             "recognizePiiEntities"
         ],
-        "image": sentiment,
+        "image": pii,
         "label": "Language Studio PII Model",
         "name": "recognizePiiEntities",
         "serviceSpecificConfig": {},
@@ -258,7 +272,7 @@ export const sc = {
         "outputTypes": [
             "extractKeyPhrases"
         ],
-        "image": sentiment,
+        "image": keyphrase,
         "label": "Language Studio Key Phrases Model",
         "name": "extractKeyPhrases",
         "serviceSpecificConfig": {},
@@ -272,7 +286,7 @@ export const sc = {
         "outputTypes": [
             "recognizeLinkedEntities"
         ],
-        "image": sentiment,
+        "image": linkedEntities,
         "label": "Language Studio Linked Entities Model",
         "name": "recognizeLinkedEntities",
         "serviceSpecificConfig": {},
@@ -300,7 +314,7 @@ export const sc = {
         "outputTypes": [
             "recognizeCustomEntities"
         ],
-        "image": sentiment,
+        "image": customNER,
         "label": "Language Studio Custom NER Model",
         "name": "recognizeCustomEntities",
         "serviceSpecificConfig": {},
@@ -314,7 +328,7 @@ export const sc = {
         "outputTypes": [
             "singleCategoryClassify"
         ],
-        "image": sentiment,
+        "image": customNER,
         "label": "Language Studio Classify Single Class Model",
         "name": "singleCategoryClassify",
         "serviceSpecificConfig": {},
@@ -328,23 +342,9 @@ export const sc = {
         "outputTypes": [
             "multiCategoryClassify"
         ],
-        "image": sentiment,
+        "image": customClassification,
         "label": "Language Studio Classify Mulitiple Classes Model",
         "name": "multiCategoryClassify",
-        "serviceSpecificConfig": {},
-        "serviceSpecificConfigDefaults": {}
-    },
-    "recognizeEntities": {
-        "bpaServiceId": "abc123",
-        "inputTypes": [
-            "text"
-        ],
-        "outputTypes": [
-            "recognizeEntities"
-        ],
-        "image": sentiment,
-        "label": "Language Studio Classify Mulitiple Classes Model",
-        "name": "recognizeEntities",
         "serviceSpecificConfig": {},
         "serviceSpecificConfigDefaults": {}
     }
