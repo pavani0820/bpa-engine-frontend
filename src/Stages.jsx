@@ -5,13 +5,12 @@ import OptionCard from './OptionCard';
 import _ from 'lodash'
 
 import { sc } from './serviceCatalog'
-import { PrimaryButton } from '@fluentui/react';
 import { Label } from '@fluentui/react/lib/Label';
-import { Dialog, DialogType, DialogFooter } from '@fluentui/react/lib/Dialog';
-import { Dropdown } from '@fluentui/react/lib/Dropdown';
+import { Button, Dialog, Dropdown } from '@fluentui/react-northstar'
 
 const dropdownStyles = {
     dropdown: { width: 300 },
+    marginTop: "20px"
 };
 
 const languages = [
@@ -21,13 +20,17 @@ const languages = [
     { key: 'fr', text: 'French' },
 ];
 
+const languagesText = [
+    'English', 'Spanish', 'Thai', 'French'
+]
+
 export default function Stages(props) {
 
     const [serviceCatalog] = useState(sc)
     const [stages, setStages] = useState([])
     const [value, setValue] = useState(0)
     const [options, setOptions] = useState([])
-    const [hideTranslateDialog, setHideTranslateDialog] = useState(true)
+    const [hideTranslateDialog, setHideTranslateDialog] = useState(false)
     const [selectedLanguage, setSelectedLanguage] = useState(null)
     const [currentOption, setCurrentOption] = useState(null)
 
@@ -101,7 +104,7 @@ export default function Stages(props) {
     const onItemClick = (event) => {
         if (event.name === 'translate') {
             setCurrentOption(_.cloneDeep(event))
-            setHideTranslateDialog(false)
+            setHideTranslateDialog(true)
         } else {
             addItemToPipeline(event)
         }
@@ -125,34 +128,23 @@ export default function Stages(props) {
         setHideTranslateDialog(!hideTranslateDialog)
     }
 
-    const dialogContentProps = {
-        type: DialogType.largeHeader,
-        title: 'Translate To Language',
-        subText: 'Select the target language to translate your documents.',
-    };
-
-    const modalProps = {
-        isBlocking: false,
-        styles: { main: { maxWidth: 450 } },
-    };
-
     const onDialogSave = (event) => {
         console.log(event)
         const newOption = currentOption
         newOption.serviceSpecificConfig = { to: selectedLanguage }
-        setHideTranslateDialog(true)
+        setHideTranslateDialog(false)
         addItemToPipeline(newOption)
     }
 
     const onDialogCancel = (event) => {
-        setHideTranslateDialog(true)
+        setHideTranslateDialog(false)
     }
 
-    const onTranslateDialogChange = (event) => {
-        console.log(event)
+    const onTranslateDialogChange = (_, data) => {
+        const value = data.value
         let key = null
         for (const l of languages) {
-            if (l.text === event.currentTarget.textContent) {
+            if (l.text === value) {
                 key = l.key
                 break
             }
@@ -167,22 +159,34 @@ export default function Stages(props) {
         return (
             <>
                 <Dialog
-                    hidden={hideTranslateDialog}
-                    onDismiss={toggleHideDialog}
-                    dialogContentProps={dialogContentProps}
-                    modalProps={modalProps}
+                    open={hideTranslateDialog}
+                    closeOnOutsideClick
+                    styles={{height: "300px"}}
+                    cancelButton="Cancel"
+                    confirmButton="Confirm"
+                    content= {
+                        <>
+                            Select the target language to translate your documents.
+                            <Dropdown
+                                search
+                                placeholder="Select an option"
+                                label="Languages"
+                                items={languagesText}
+                                autoSize
+                                styles={dropdownStyles}
+                                onChange={onTranslateDialogChange}
+                                noResultsMessage="We couldn't find any matches."
+                                getA11ySelectionMessage={{
+                                onAdd: item => `${item} has been selected.`,
+                                }}
+                            />
+                        </>
+                    }
+                    header="Translate to language"
+                    onCancel={onDialogCancel}
+                    onConfirm={onDialogSave}
                 >
-                    <Dropdown
-                        placeholder="Select an option"
-                        label="Languages"
-                        options={languages}
-                        styles={dropdownStyles}
-                        onChange={onTranslateDialogChange}
-                    />
-                    <DialogFooter>
-                        <PrimaryButton onClick={onDialogSave} text="Save" />
-                        <PrimaryButton onClick={onDialogCancel} text="Cancel" />
-                    </DialogFooter>
+                    
                 </Dialog>
                 <Label theme={props.theme} style={{ fontFamily: props.theme.fonts.xLarge.fontFamily, fontSize: props.theme.fonts.xLarge.fontSize }}>Select a stage to add it to your pipeline configuration</Label>
                 {renderOptions(options)}
@@ -196,9 +200,12 @@ export default function Stages(props) {
                 <>
                     <Label theme={props.theme} style={{ fontFamily: props.theme.fonts.xLarge.fontFamily, fontSize: props.theme.fonts.xLarge.fontSize }}>Pipeline Preview</Label>
                     <PipelinePreview stages={stages} />
-                    <div>
-                        <PrimaryButton onClick={onDone} style={{ marginRight: "5px", marginBottom: "50px" }} text="Done"></PrimaryButton>{' '}
-                        <PrimaryButton onClick={onResetPipeline} text="Reset Pipeline"></PrimaryButton>{' '}
+                    <div style={{
+                        marginLeft: "700px",
+                        marginBottom: "50px"
+                    }}>
+                        <Button onClick={onResetPipeline} content="Reset Pipeline"/>{' '}
+                        <Button onClick={onDone} content="Done" primary />{' '}
                     </div>
                 </>
             )

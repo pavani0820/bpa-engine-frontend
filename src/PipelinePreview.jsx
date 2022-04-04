@@ -1,5 +1,4 @@
 import OptionCard from "./OptionCard"
-import arrow from "./images/arrow.png"
 
 import { Label } from '@fluentui/react/lib/Label';
 import { ArrowRightIcon } from '@fluentui/react-icons-northstar'
@@ -21,7 +20,6 @@ export default function PipelinePreview(props) {
                             <>
                                 <OptionCard option={option} />
                                 <div style={{width: "40px", marginTop: "auto", marginBottom: "auto"}}><ArrowRightIcon size="largest"/></div>
-                                {/* <img src={arrow} alt="progress indicator" /> */}
                             </>)
                     }
                 })}
