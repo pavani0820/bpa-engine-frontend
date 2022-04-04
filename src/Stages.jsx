@@ -99,7 +99,7 @@ export default function Stages(props) {
         console.log(event.name)
         if (event.name === 'translate') {
             setCurrentOption(_.cloneDeep(event))
-            setHideTranslateDialog(true)
+            setHideTranslateDialog(false)
         } else if (event.name === 'customFormRec'){
             setCurrentOption(_.cloneDeep(event))
             setHideFormRecDialog(false)

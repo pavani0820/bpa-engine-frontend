@@ -1,25 +1,11 @@
 import React, {useState} from 'react'
-import { Dialog, DialogFooter, Button, Input, Label } from '@fluentui/react-northstar';
+import { Dialog, Input, Label } from '@fluentui/react-northstar';
 
 
 export default function LanguageMultiClassifyDialog(props) {
 
     const [projectName, setProjectName] = useState(null)
     const [deploymentName, setDeploymentName] = useState(null)
-
-    const toggleHideDialog = () => {
-        props.setHideDialog(!props.hideDialog)
-    }
-
-    const dialogContentProps = {
-        title: 'Custom Mulit-Class',
-        subText: 'Enter the Project and Deployment Name for your custom model',
-    };
-
-    const modalProps = {
-        isBlocking: false,
-        styles: { main: { maxWidth: 450 } },
-    };
 
     const onDialogSave = (event) => {
         console.log(event)
@@ -44,19 +30,30 @@ export default function LanguageMultiClassifyDialog(props) {
 
     return (
         <Dialog
-            hidden={props.hideDialog}
-            onDismiss={toggleHideDialog}
-            dialogContentProps={dialogContentProps}
-            modalProps={modalProps}
-        >
-            <Label>Project Name</Label>
-            <Input value={projectName} onChange={onProjectNameDialogChange}/>
-            <Label>Deployment Name</Label>
-            <Input value={deploymentName} onChange={onDeploymentNameDialogChange}/>
-            <DialogFooter>
-                <Button onClick={onDialogSave} text="Save" />
-                <Button onClick={onDialogCancel} text="Cancel" />
-            </DialogFooter>
-        </Dialog>
+
+            content={{
+                children: () => {
+                    return (
+                        <div>
+                            <div>
+                                <Label>Project Name</Label>
+                                <Input value={projectName} onChange={onProjectNameDialogChange} />
+                            </div>
+
+                            <div>
+                                <Label>Deployment Name</Label>
+                                <Input value={deploymentName} onChange={onDeploymentNameDialogChange} />
+                            </div>
+
+                        </div>
+                    )
+                },
+            }}
+            open={!props.hideDialog}
+            cancelButton="Cancel"
+            confirmButton="Submit"
+            onConfirm={onDialogSave}
+            onCancel={onDialogCancel}
+        />
     )
 } 
