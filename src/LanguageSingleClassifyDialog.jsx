@@ -1,25 +1,11 @@
 import React, {useState} from 'react'
-import { Dialog, DialogFooter, Button, Input, Label } from '@fluentui/react-northstar';
+import { Dialog, Input, Label } from '@fluentui/react-northstar';
 
 
 export default function LanguageCustomNerDialog(props) {
 
     const [projectName, setProjectName] = useState(null)
     const [deploymentName, setDeploymentName] = useState(null)
-
-    const toggleHideDialog = () => {
-        props.setHideDialog(!props.hideDialog)
-    }
-
-    const dialogContentProps = {
-        title: 'Custom Single Class',
-        subText: 'Enter the Project and Deployment Name for your custom model',
-    };
-
-    const modalProps = {
-        isBlocking: false,
-        styles: { main: { maxWidth: 450 } },
-    };
 
     const onDialogSave = (event) => {
         console.log(event)
@@ -46,10 +32,9 @@ export default function LanguageCustomNerDialog(props) {
         <Dialog
 
             content={{
-                children: (Component, props) => {
-                    const { styles, ...rest } = props
+                children: () => {
                     return (
-                        <div style={{  }}>
+                        <div>
                             <div>
                                 <Label>Project Name</Label>
                                 <Input value={projectName} onChange={onProjectNameDialogChange} />

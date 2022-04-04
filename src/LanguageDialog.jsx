@@ -1,14 +1,10 @@
 import React, { useState } from 'react'
-import { Dialog, DialogFooter, Dropdown, Button } from '@fluentui/react-northstar';
+import { Dialog, Dropdown } from '@fluentui/react-northstar';
 
 
 export default function LanguageDialog(props) {
 
     const [selectedLanguage, setSelectedLanguage] = useState(null)
-
-    const dropdownStyles = {
-        dropdown: { width: 300 },
-    };
 
     const languages = [
         { key: 'en', text: 'English' },
@@ -25,17 +21,6 @@ export default function LanguageDialog(props) {
         return out
     }
 
-
-    const dialogContentProps = {
-        title: 'Translate To Language',
-        subText: 'Select the target language to translate your documents.',
-    };
-
-    const modalProps = {
-        isBlocking: false,
-        styles: { main: { maxWidth: 450 } },
-    };
-
     const onDialogSave = (event) => {
         console.log(event)
         const newOption = props.currentOption
@@ -44,7 +29,7 @@ export default function LanguageDialog(props) {
         props.addItemToPipeline(newOption)
     }
 
-    const onDialogCancel = (event) => {
+    const onDialogCancel = () => {
         props.setHideDialog(true)
     }
 
@@ -53,35 +38,15 @@ export default function LanguageDialog(props) {
     }
 
     return (
-        // <Dialog
-        //     hidden={props.hideDialog}
-        //     onDismiss={toggleHideDialog}
-        //     dialogContentProps={dialogContentProps}
-        //     modalProps={modalProps}
-        // >
-        //     <Dropdown
-        //         placeholder="Select an option"
-        //         label="Languages"
-        //         options={languages}
-        //         styles={dropdownStyles}
-        //         onChange={onTranslateDialogChange}
-        //     />
-        //     <DialogFooter>
-        //         <Button onClick={onDialogSave} text="Save" />
-        //         <Button onClick={onDialogCancel} text="Cancel" />
-        //     </DialogFooter>
-        // </Dialog>
         <Dialog
             content={{
-                children: (Component, props) => {
-                    // const { styles, ...rest } = props
+                children: () => {
                     return (
                         <div style={{}}>
                             <Dropdown
                                 placeholder="Select an option"
                                 label="Languages"
                                 items={languagesToStrings()}
-                                // styles={dropdownStyles}
                                 onChange={onTranslateDialogChange}
                             />
                         </div>
