@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FileUploader } from "react-drag-drop-files";
-import { Label } from '@fluentui/react/lib/Label';
+import { Label } from '@fluentui/react-northstar';
 
 
 
@@ -12,10 +12,8 @@ function Upload(props) {
 
     const [showFail, setShowFail] = useState(false);
 
-    const labelStyle = { fontFamily: props.theme.fonts.xxLarge.fontFamily, fontSize: props.theme.fonts.xxLarge.fontSize, paddingLeft: "20px" }
-    const smallLabelStyle = { fontFamily: props.theme.fonts.xLarge.fontFamily, fontSize: props.theme.fonts.xLarge.fontSize, padding: "20px", width:"1000px" }
-
-
+    const labelStyle = { paddingLeft: "20px" }
+    const smallLabelStyle = { padding: "20px" }
 
     const handleChange = async (file) => {
         try {

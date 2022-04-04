@@ -4,20 +4,7 @@ import Stages from './Stages'
 import CurrentPipeline from './CurrentPipeline'
 import Home from './Home'
 import Upload from './Upload';
-import { Breadcrumb } from '@fluentui/react/lib/Breadcrumb';
-import { TooltipHost } from '@fluentui/react/lib/Tooltip';
-
-
-function _getCustomDivider(dividerProps) {
-    const tooltipText = dividerProps.item ? dividerProps.item.text : '';
-    return (
-        <TooltipHost content={`Show ${tooltipText} contents`} calloutProps={{ gapSpace: 0 }}>
-            <span aria-hidden="true" style={{ cursor: 'pointer', padding: 5 }}>
-                /
-            </span>
-        </TooltipHost>
-    );
-}
+import { Breadcrumb, BreadcrumbDivider, Tooltip } from '@fluentui/react-northstar';
 
 
 export default function Content(props) {
@@ -65,7 +52,60 @@ export default function Content(props) {
             case 'CONFIGURE_PIPELINE':
                 return (<Stages theme={props.theme} onSelectContent={onSelectContent} />)
             case 'UPLOAD_DOCUMENTS':
-                return (<Upload theme={props.theme}/>)
+                return (<Upload theme={props.theme} />)
+
+            default:
+                return (<Home />)
+        }
+    }
+
+    const renderBreadcrumb = () => {
+        switch (selectedMenuItem) {
+            case 'HOME':
+                return (
+                    <Breadcrumb >
+                        <Breadcrumb.Item>
+                            Home
+                        </Breadcrumb.Item>
+                    </Breadcrumb>)
+            case 'CURRENT_PIPELINE':
+                return (
+                    <>
+                        <Breadcrumb >
+                            <Breadcrumb.Item>
+                                <Breadcrumb.Link onClick={onBreadcrumbHome}>Home</Breadcrumb.Link>
+                            </Breadcrumb.Item>
+                        </Breadcrumb>
+                        <BreadcrumbDivider />
+                        <Breadcrumb.Item>
+                            Create Pipeline
+                        </Breadcrumb.Item>
+                    </>)
+            case 'CONFIGURE_PIPELINE':
+                return (
+                    <>
+                        <Breadcrumb >
+                            <Breadcrumb.Item>
+                                <Breadcrumb.Link onClick={onBreadcrumbHome}>Home</Breadcrumb.Link>
+                            </Breadcrumb.Item>
+                        </Breadcrumb>
+                        <BreadcrumbDivider />
+                        <Breadcrumb.Item>
+                            View Pipeline
+                        </Breadcrumb.Item>
+                    </>)
+            case 'UPLOAD_DOCUMENTS':
+                return (<>
+                    <Breadcrumb >
+                        <Breadcrumb.Item>
+                            <Breadcrumb.Link onClick={onBreadcrumbHome}>Home</Breadcrumb.Link>
+                        </Breadcrumb.Item>
+                    </Breadcrumb>
+                    <BreadcrumbDivider />
+                    <Breadcrumb.Item>
+                        Ingest Documents
+                    </Breadcrumb.Item>
+                </>)
 
             default:
                 return (<Home />)
@@ -74,8 +114,8 @@ export default function Content(props) {
 
     return (
         <div className="content" >
-            <div style={{ paddingLeft: "200px", paddingTop: "50px" }}>
-                <Breadcrumb items={breadCrumbItems} dividerAs={_getCustomDivider} theme={props.theme} />
+            <div style={{ paddingLeft: "0px", paddingTop: "50px", maxWidth: "1000px", minWidth: "1000px", marginLeft: "auto", marginRight: "auto" }}>
+                {renderBreadcrumb()}
                 {renderContent()}
             </div>
         </div>

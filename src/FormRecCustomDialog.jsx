@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
-import { Dialog, DialogType, DialogFooter } from '@fluentui/react/lib/Dialog';
-import { PrimaryButton, TextField } from '@fluentui/react';
+import { Dialog, DialogFooter, Button, Input } from '@fluentui/react-northstar';
 
 
 export default function FormRecCustomDialog(props) {
@@ -12,7 +11,6 @@ export default function FormRecCustomDialog(props) {
     }
 
     const dialogContentProps = {
-        type: DialogType.largeHeader,
         title: 'Model ID',
         subText: 'Enter the Form Recognizer Custom Model ID',
     };
@@ -46,10 +44,10 @@ export default function FormRecCustomDialog(props) {
             dialogContentProps={dialogContentProps}
             modalProps={modalProps}
         >
-            <TextField value={modelId} onChange={onDialogChange}/>
+            <Input value={modelId} onChange={onDialogChange}/>
             <DialogFooter>
-                <PrimaryButton onClick={onDialogSave} text="Save" />
-                <PrimaryButton onClick={onDialogCancel} text="Cancel" />
+                <Button onClick={onDialogSave} text="Save" />
+                <Button onClick={onDialogCancel} text="Cancel" />
             </DialogFooter>
         </Dialog>
     )

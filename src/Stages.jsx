@@ -4,14 +4,14 @@ import PipelinePreview from './PipelinePreview'
 import OptionCard from './OptionCard';
 import _ from 'lodash'
 
-import { sc } from './serviceCatalog'
-import { PrimaryButton } from '@fluentui/react';
-import { Label } from '@fluentui/react/lib/Label';
 import LanguageDialog from './LanguageDialog';
 import FormRecCustomDialog from './FormRecCustomDialog';
 import LanguageCustomNerDialog from './LanguageCustomNerDialog';
 import LanguageMultiClassifyDialog from './LanguageMultiClassifyDialog';
 import LanguageSingleClassifyDialog from './LanguageSingleClassifyDialog'
+
+import { sc } from './serviceCatalog'
+import { Button, Label } from '@fluentui/react-northstar'
 
 
 export default function Stages(props) {
@@ -99,7 +99,7 @@ export default function Stages(props) {
         console.log(event.name)
         if (event.name === 'translate') {
             setCurrentOption(_.cloneDeep(event))
-            setHideTranslateDialog(false)
+            setHideTranslateDialog(true)
         } else if (event.name === 'customFormRec'){
             setCurrentOption(_.cloneDeep(event))
             setHideFormRecDialog(false)
@@ -133,12 +133,13 @@ export default function Stages(props) {
     const renderStageTop = () => {
         return (
             <>
+                <Label style={{color : "black"}}>Select a stage to add it to your pipeline configuration</Label>
                 <LanguageSingleClassifyDialog hideDialog={hideCustomSingleDialog} setHideDialog={setHideCustomSingleDialog} currentOption={currentOption} addItemToPipeline={addItemToPipeline} />
                 <LanguageMultiClassifyDialog hideDialog={hideCustomMultiDialog} setHideDialog={setHideCustomMultiDialog} currentOption={currentOption} addItemToPipeline={addItemToPipeline} />
                 <LanguageCustomNerDialog hideDialog={hideCustomNerDialog} setHideDialog={setHideCustomNerDialog} currentOption={currentOption} addItemToPipeline={addItemToPipeline} />
                 <FormRecCustomDialog hideDialog={hideFormRecDialog} setHideDialog={setHideFormRecDialog} currentOption={currentOption} addItemToPipeline={addItemToPipeline} />
                 <LanguageDialog hideDialog={hideTranslateDialog} setHideDialog={setHideTranslateDialog} currentOption={currentOption} addItemToPipeline={addItemToPipeline} />
-                <Label theme={props.theme} style={{ fontFamily: props.theme.fonts.xxLarge.fontFamily, fontSize: props.theme.fonts.xxLarge.fontSize }}>Select a stage to add it to your pipeline configuration</Label>
+
                 {renderOptions(options)}
             </>
         )
@@ -148,11 +149,14 @@ export default function Stages(props) {
         if (stages && stages.length > 0) {
             return (
                 <>
-                    <Label theme={props.theme} style={{ fontFamily: props.theme.fonts.xxLarge.fontFamily, fontSize: props.theme.fonts.xxLarge.fontSize }}>Pipeline Preview</Label>
+                    <Label style={{color: "black"}}>Pipeline Preview</Label>
                     <PipelinePreview stages={stages} />
-                    <div>
-                        <PrimaryButton onClick={onDone} style={{ margin: "50px" }} text="Done"></PrimaryButton>{' '}
-                        <PrimaryButton onClick={onResetPipeline} text="Reset Pipeline"></PrimaryButton>{' '}
+                    <div style={{
+                        marginLeft: "700px",
+                        marginBottom: "50px"
+                    }}>
+                        <Button onClick={onResetPipeline} content="Reset Pipeline"/>{' '}
+                        <Button onClick={onDone} content="Done" primary />{' '}
                     </div>
                 </>
             )

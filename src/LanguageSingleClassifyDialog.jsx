@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
-import { Dialog, DialogType, DialogFooter } from '@fluentui/react/lib/Dialog';
-import { PrimaryButton, TextField, Label } from '@fluentui/react';
+import { Dialog, DialogFooter, Button, Input, Label } from '@fluentui/react-northstar';
 
 
 export default function LanguageCustomNerDialog(props) {
@@ -13,7 +12,6 @@ export default function LanguageCustomNerDialog(props) {
     }
 
     const dialogContentProps = {
-        type: DialogType.largeHeader,
         title: 'Custom Single Class',
         subText: 'Enter the Project and Deployment Name for your custom model',
     };
@@ -52,12 +50,12 @@ export default function LanguageCustomNerDialog(props) {
             modalProps={modalProps}
         >
             <Label>Project Name</Label>
-            <TextField value={projectName} onChange={onProjectNameDialogChange}/>
+            <Input value={projectName} onChange={onProjectNameDialogChange}/>
             <Label>Deployment Name</Label>
-            <TextField value={deploymentName} onChange={onDeploymentNameDialogChange}/>
+            <Input value={deploymentName} onChange={onDeploymentNameDialogChange}/>
             <DialogFooter>
-                <PrimaryButton onClick={onDialogSave} text="Save" />
-                <PrimaryButton onClick={onDialogCancel} text="Cancel" />
+                <Button onClick={onDialogSave} text="Save" />
+                <Button onClick={onDialogCancel} text="Cancel" />
             </DialogFooter>
         </Dialog>
     )
