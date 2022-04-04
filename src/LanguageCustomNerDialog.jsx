@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { Dialog, DialogFooter } from '@fluentui/react-northstar';
 import { Button, Input, Label } from '@fluentui/react-northstar';
 
@@ -35,29 +35,41 @@ export default function LanguageCustomNerDialog(props) {
     }
 
     const onProjectNameDialogChange = (event, newValue) => {
-        setProjectName(newValue)
+        setProjectName(newValue.value)
     }
 
     const onDeploymentNameDialogChange = (event, newValue) => {
-        setDeploymentName(newValue)
+        setDeploymentName(newValue.value)
     }
 
 
     return (
         <Dialog
-            hidden={props.hideDialog}
-            onDismiss={toggleHideDialog}
-            dialogContentProps={dialogContentProps}
-            modalProps={modalProps}
-        >
-            <Label>Project Name</Label>
-            <Input value={projectName} onChange={onProjectNameDialogChange}/>
-            <Label>Deployment Name</Label>
-            <Input value={deploymentName} onChange={onDeploymentNameDialogChange}/>
-            <DialogFooter>
-                <Button onClick={onDialogSave} text="Save" />
-                <Button onClick={onDialogCancel} text="Cancel" />
-            </DialogFooter>
-        </Dialog>
+
+            content={{
+                children: (Component, props) => {
+                    const { styles, ...rest } = props
+                    return (
+                        <div style={{  }}>
+                            <div>
+                                <Label>Project Name</Label>
+                                <Input value={projectName} onChange={onProjectNameDialogChange} />
+                            </div>
+
+                            <div>
+                                <Label>Deployment Name</Label>
+                                <Input value={deploymentName} onChange={onDeploymentNameDialogChange} />
+                            </div>
+
+                        </div>
+                    )
+                },
+            }}
+            open={!props.hideDialog}
+            cancelButton="Cancel"
+            confirmButton="Submit"
+            onConfirm={onDialogSave}
+            onCancel={onDialogCancel}
+        />
     )
 } 
