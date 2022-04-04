@@ -4,6 +4,12 @@ import PipelinePreview from './PipelinePreview'
 import OptionCard from './OptionCard';
 import _ from 'lodash'
 
+import LanguageDialog from './LanguageDialog';
+import FormRecCustomDialog from './FormRecCustomDialog';
+import LanguageCustomNerDialog from './LanguageCustomNerDialog';
+import LanguageMultiClassifyDialog from './LanguageMultiClassifyDialog';
+import LanguageSingleClassifyDialog from './LanguageSingleClassifyDialog'
+
 import { sc } from './serviceCatalog'
 import { Label } from '@fluentui/react/lib/Label';
 import { Button, Dialog, Dropdown } from '@fluentui/react-northstar'
@@ -30,8 +36,12 @@ export default function Stages(props) {
     const [stages, setStages] = useState([])
     const [value, setValue] = useState(0)
     const [options, setOptions] = useState([])
-    const [hideTranslateDialog, setHideTranslateDialog] = useState(false)
-    const [selectedLanguage, setSelectedLanguage] = useState(null)
+    const [hideTranslateDialog, setHideTranslateDialog] = useState(true)
+    const [hideFormRecDialog, setHideFormRecDialog] = useState(true)
+    const [hideCustomNerDialog, setHideCustomNerDialog] = useState(true)
+    const [hideCustomSingleDialog, setHideCustomSingleDialog] = useState(true)
+    const [hideCustomMultiDialog, setHideCustomMultiDialog] = useState(true)
+
     const [currentOption, setCurrentOption] = useState(null)
 
 
@@ -50,13 +60,13 @@ export default function Stages(props) {
     }, [])
 
     const onDone = async () => {
-        try{
-            await axios.post('/api/config', { stages: stages.slice(1, stages.length), id: "1" })  
-        } catch(err) {
+        try {
+            await axios.post('/api/config', { stages: stages.slice(1, stages.length), id: "1" })
+        } catch (err) {
             console.log(err)
         }
 
-        props.onSelectContent({currentTarget : {id : "CURRENT_PIPELINE"}})
+        props.onSelectContent({ currentTarget: { id: "CURRENT_PIPELINE" } })
         setOptions([])
     }
 
@@ -102,10 +112,23 @@ export default function Stages(props) {
 
 
     const onItemClick = (event) => {
+        console.log(event.name)
         if (event.name === 'translate') {
             setCurrentOption(_.cloneDeep(event))
             setHideTranslateDialog(true)
-        } else {
+        } else if (event.name === 'customFormRec'){
+            setCurrentOption(_.cloneDeep(event))
+            setHideFormRecDialog(false)
+        } else if (event.name === 'recognizeCustomEntities'){
+            setCurrentOption(_.cloneDeep(event))
+            setHideCustomNerDialog(false)
+        }else if (event.name === 'singleCategoryClassify'){
+            setCurrentOption(_.cloneDeep(event))
+            setHideCustomSingleDialog(false)
+        }else if (event.name === 'multiCategoryClassify'){
+            setCurrentOption(_.cloneDeep(event))
+            setHideCustomMultiDialog(false)
+        }else {
             addItemToPipeline(event)
         }
 
@@ -121,7 +144,6 @@ export default function Stages(props) {
                 </div>
             )
         }
-
     }
 
     const toggleHideDialog = () => {
@@ -152,50 +174,26 @@ export default function Stages(props) {
         if (key) {
             setSelectedLanguage(key)
         }
-
     }
 
     const renderStageTop = () => {
         return (
             <>
-                <Dialog
-                    open={hideTranslateDialog}
-                    closeOnOutsideClick
-                    styles={{height: "300px"}}
-                    cancelButton="Cancel"
-                    confirmButton="Confirm"
-                    content= {
-                        <>
-                            Select the target language to translate your documents.
-                            <Dropdown
-                                search
-                                placeholder="Select an option"
-                                label="Languages"
-                                items={languagesText}
-                                autoSize
-                                styles={dropdownStyles}
-                                onChange={onTranslateDialogChange}
-                                noResultsMessage="We couldn't find any matches."
-                                getA11ySelectionMessage={{
-                                onAdd: item => `${item} has been selected.`,
-                                }}
-                            />
-                        </>
-                    }
-                    header="Translate to language"
-                    onCancel={onDialogCancel}
-                    onConfirm={onDialogSave}
-                >
-                    
-                </Dialog>
                 <Label theme={props.theme} style={{ fontFamily: props.theme.fonts.xLarge.fontFamily, fontSize: props.theme.fonts.xLarge.fontSize }}>Select a stage to add it to your pipeline configuration</Label>
+                <LanguageSingleClassifyDialog hideDialog={hideCustomSingleDialog} setHideDialog={setHideCustomSingleDialog} currentOption={currentOption} addItemToPipeline={addItemToPipeline} />
+                <LanguageMultiClassifyDialog hideDialog={hideCustomMultiDialog} setHideDialog={setHideCustomMultiDialog} currentOption={currentOption} addItemToPipeline={addItemToPipeline} />
+                <LanguageCustomNerDialog hideDialog={hideCustomNerDialog} setHideDialog={setHideCustomNerDialog} currentOption={currentOption} addItemToPipeline={addItemToPipeline} />
+                <FormRecCustomDialog hideDialog={hideFormRecDialog} setHideDialog={setHideFormRecDialog} currentOption={currentOption} addItemToPipeline={addItemToPipeline} />
+                <LanguageDialog hideDialog={hideTranslateDialog} setHideDialog={setHideTranslateDialog} currentOption={currentOption} addItemToPipeline={addItemToPipeline} />
+                <Label theme={props.theme} style={{ fontFamily: props.theme.fonts.xxLarge.fontFamily, fontSize: props.theme.fonts.xxLarge.fontSize }}>Select a stage to add it to your pipeline configuration</Label>
+
                 {renderOptions(options)}
             </>
         )
     }
 
     const renderStageBottom = () => {
-        if(stages && stages.length > 0){
+        if (stages && stages.length > 0) {
             return (
                 <>
                     <Label theme={props.theme} style={{ fontFamily: props.theme.fonts.xLarge.fontFamily, fontSize: props.theme.fonts.xLarge.fontSize }}>Pipeline Preview</Label>
@@ -210,21 +208,12 @@ export default function Stages(props) {
                 </>
             )
         }
-        
     }
 
-    const renderStage = () => {
-        return (
-            <div style={{ paddingLeft: "10px", paddingTop: "50px" }}>
-                {renderStageTop()}
-                {renderStageBottom()}
-            </div>
-        )
-    }
-
-    return (<>
-        {renderStage()}
-    </>)
-
-
+    return (
+        <div style={{ paddingLeft: "10px", paddingTop: "50px" }}>
+            {renderStageTop()}
+            {renderStageBottom()}
+        </div>
+    )
 }
