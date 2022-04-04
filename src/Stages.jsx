@@ -4,15 +4,31 @@ import PipelinePreview from './PipelinePreview'
 import OptionCard from './OptionCard';
 import _ from 'lodash'
 
-import { sc } from './serviceCatalog'
-import { PrimaryButton } from '@fluentui/react';
-import { Label } from '@fluentui/react/lib/Label';
 import LanguageDialog from './LanguageDialog';
 import FormRecCustomDialog from './FormRecCustomDialog';
 import LanguageCustomNerDialog from './LanguageCustomNerDialog';
 import LanguageMultiClassifyDialog from './LanguageMultiClassifyDialog';
 import LanguageSingleClassifyDialog from './LanguageSingleClassifyDialog'
 
+import { sc } from './serviceCatalog'
+import { Label } from '@fluentui/react/lib/Label';
+import { Button, Dialog, Dropdown } from '@fluentui/react-northstar'
+
+const dropdownStyles = {
+    dropdown: { width: 300 },
+    marginTop: "20px"
+};
+
+const languages = [
+    { key: 'en', text: 'English' },
+    { key: 'es', text: 'Spanish' },
+    { key: 'th', text: 'Thai' },
+    { key: 'fr', text: 'French' },
+];
+
+const languagesText = [
+    'English', 'Spanish', 'Thai', 'French'
+]
 
 export default function Stages(props) {
 
@@ -99,7 +115,7 @@ export default function Stages(props) {
         console.log(event.name)
         if (event.name === 'translate') {
             setCurrentOption(_.cloneDeep(event))
-            setHideTranslateDialog(false)
+            setHideTranslateDialog(true)
         } else if (event.name === 'customFormRec'){
             setCurrentOption(_.cloneDeep(event))
             setHideFormRecDialog(false)
@@ -130,15 +146,47 @@ export default function Stages(props) {
         }
     }
 
+    const toggleHideDialog = () => {
+        setHideTranslateDialog(!hideTranslateDialog)
+    }
+
+    const onDialogSave = (event) => {
+        console.log(event)
+        const newOption = currentOption
+        newOption.serviceSpecificConfig = { to: selectedLanguage }
+        setHideTranslateDialog(false)
+        addItemToPipeline(newOption)
+    }
+
+    const onDialogCancel = (event) => {
+        setHideTranslateDialog(false)
+    }
+
+    const onTranslateDialogChange = (_, data) => {
+        const value = data.value
+        let key = null
+        for (const l of languages) {
+            if (l.text === value) {
+                key = l.key
+                break
+            }
+        }
+        if (key) {
+            setSelectedLanguage(key)
+        }
+    }
+
     const renderStageTop = () => {
         return (
             <>
+                <Label theme={props.theme} style={{ fontFamily: props.theme.fonts.xLarge.fontFamily, fontSize: props.theme.fonts.xLarge.fontSize }}>Select a stage to add it to your pipeline configuration</Label>
                 <LanguageSingleClassifyDialog hideDialog={hideCustomSingleDialog} setHideDialog={setHideCustomSingleDialog} currentOption={currentOption} addItemToPipeline={addItemToPipeline} />
                 <LanguageMultiClassifyDialog hideDialog={hideCustomMultiDialog} setHideDialog={setHideCustomMultiDialog} currentOption={currentOption} addItemToPipeline={addItemToPipeline} />
                 <LanguageCustomNerDialog hideDialog={hideCustomNerDialog} setHideDialog={setHideCustomNerDialog} currentOption={currentOption} addItemToPipeline={addItemToPipeline} />
                 <FormRecCustomDialog hideDialog={hideFormRecDialog} setHideDialog={setHideFormRecDialog} currentOption={currentOption} addItemToPipeline={addItemToPipeline} />
                 <LanguageDialog hideDialog={hideTranslateDialog} setHideDialog={setHideTranslateDialog} currentOption={currentOption} addItemToPipeline={addItemToPipeline} />
                 <Label theme={props.theme} style={{ fontFamily: props.theme.fonts.xxLarge.fontFamily, fontSize: props.theme.fonts.xxLarge.fontSize }}>Select a stage to add it to your pipeline configuration</Label>
+
                 {renderOptions(options)}
             </>
         )
@@ -148,11 +196,14 @@ export default function Stages(props) {
         if (stages && stages.length > 0) {
             return (
                 <>
-                    <Label theme={props.theme} style={{ fontFamily: props.theme.fonts.xxLarge.fontFamily, fontSize: props.theme.fonts.xxLarge.fontSize }}>Pipeline Preview</Label>
+                    <Label theme={props.theme} style={{ fontFamily: props.theme.fonts.xLarge.fontFamily, fontSize: props.theme.fonts.xLarge.fontSize }}>Pipeline Preview</Label>
                     <PipelinePreview stages={stages} />
-                    <div>
-                        <PrimaryButton onClick={onDone} style={{ margin: "50px" }} text="Done"></PrimaryButton>{' '}
-                        <PrimaryButton onClick={onResetPipeline} text="Reset Pipeline"></PrimaryButton>{' '}
+                    <div style={{
+                        marginLeft: "700px",
+                        marginBottom: "50px"
+                    }}>
+                        <Button onClick={onResetPipeline} content="Reset Pipeline"/>{' '}
+                        <Button onClick={onDone} content="Done" primary />{' '}
                     </div>
                 </>
             )

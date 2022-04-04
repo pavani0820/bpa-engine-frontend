@@ -74,7 +74,7 @@ export default function Content(props) {
 
     return (
         <div className="content" >
-            <div style={{ paddingLeft: "200px", paddingTop: "50px" }}>
+            <div style={{ paddingLeft: "0px", paddingTop: "50px", maxWidth: "1000px", minWidth: "1000px", marginLeft: "auto", marginRight: "auto" }}>
                 <Breadcrumb items={breadCrumbItems} dividerAs={_getCustomDivider} theme={props.theme} />
                 {renderContent()}
             </div>

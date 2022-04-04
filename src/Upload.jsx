@@ -12,10 +12,8 @@ function Upload(props) {
 
     const [showFail, setShowFail] = useState(false);
 
-    const labelStyle = { fontFamily: props.theme.fonts.xxLarge.fontFamily, fontSize: props.theme.fonts.xxLarge.fontSize, paddingLeft: "20px" }
-    const smallLabelStyle = { fontFamily: props.theme.fonts.xLarge.fontFamily, fontSize: props.theme.fonts.xLarge.fontSize, padding: "20px", width:"1000px" }
-
-
+    const labelStyle = { fontFamily: props.theme.fonts.xLarge.fontFamily, fontSize: props.theme.fonts.xLarge.fontSize, paddingLeft: "20px" }
+    const smallLabelStyle = { fontFamily: props.theme.fonts.medium.fontFamily, fontSize: props.theme.fonts.medium.fontSize, padding: "20px" }
 
     const handleChange = async (file) => {
         try {
