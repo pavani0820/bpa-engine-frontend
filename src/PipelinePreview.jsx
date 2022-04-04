@@ -1,6 +1,6 @@
 import OptionCard from "./OptionCard"
 
-import { Label } from '@fluentui/react/lib/Label';
+import { Label } from '@fluentui/react-northstar';
 import { ArrowRightIcon } from '@fluentui/react-icons-northstar'
 
 
@@ -28,7 +28,7 @@ export default function PipelinePreview(props) {
     } else {
         return (<>
             <div style={{ paddingTop: "20px", paddingLeft: "0px" }}>
-                <Label theme={props.theme} style={{ fontFamily: props.theme.fonts.medium.fontFamily, fontSize: props.theme.fonts.medium.fontSize }}>No Configuration Found</Label></div> 
+                <Label>No Configuration Found</Label></div> 
         </>)
     }
 }

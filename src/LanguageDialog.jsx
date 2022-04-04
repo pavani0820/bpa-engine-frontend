@@ -1,7 +1,5 @@
 import React, {useState} from 'react'
-import { Dialog, DialogType, DialogFooter } from '@fluentui/react/lib/Dialog';
-import { Dropdown } from '@fluentui/react/lib/Dropdown';
-import { PrimaryButton } from '@fluentui/react';
+import { Dialog, DialogFooter, Dropdown, Button } from '@fluentui/react-northstar';
 
 
 export default function LanguageDialog(props) {
@@ -23,7 +21,6 @@ export default function LanguageDialog(props) {
     }
 
     const dialogContentProps = {
-        type: DialogType.largeHeader,
         title: 'Translate To Language',
         subText: 'Select the target language to translate your documents.',
     };
@@ -75,8 +72,8 @@ export default function LanguageDialog(props) {
                 onChange={onTranslateDialogChange}
             />
             <DialogFooter>
-                <PrimaryButton onClick={onDialogSave} text="Save" />
-                <PrimaryButton onClick={onDialogCancel} text="Cancel" />
+                <Button onClick={onDialogSave} text="Save" />
+                <Button onClick={onDialogCancel} text="Cancel" />
             </DialogFooter>
         </Dialog>
     )

@@ -1,17 +1,67 @@
 import React from 'react';
 import './styles/update.css'
-import Header from './Header';
+import HeaderComponent from './HeaderComponent';
 import Content from './Content';
-import { getTheme } from '@fluentui/react';
-import { Provider, teamsTheme } from '@fluentui/react-northstar'
+import { Provider, teamsTheme, mergeThemes } from '@fluentui/react-northstar'
 
-
-const theme = getTheme()
+const theme = {
+  componentVariables: {
+    // 💡 `colorScheme` is the object containing all color tokens
+    Header: ({ colorScheme }) => ({
+      // `brand` contains all design tokens for the `brand` color
+      color: colorScheme.default.foreground3,
+      backgroundColor: "rgb(0, 120, 212)",
+      // `foreground3` and `background3` are theme-dependent tokens that should
+      // be used as value in styles, you can define own tokens 💪
+    }),
+    Label : ({ colorScheme }) => ({
+      // `brand` contains all design tokens for the `brand` color
+      color: "rgb(0, 120, 212)",
+      backgroundColor: colorScheme.default.background,
+      fontSize: "20px",
+      height: "50px"
+      // `foreground3` and `background3` are theme-dependent tokens that should
+      // be used as value in styles, you can define own tokens 💪
+    }),
+    Breadcrumb : ({ colorScheme }) => ({
+      // `brand` contains all design tokens for the `brand` color
+      backgroundColor: colorScheme.default.background,
+      fontSize: "18px"
+      // `foreground3` and `background3` are theme-dependent tokens that should
+      // be used as value in styles, you can define own tokens 💪
+    }),
+  },
+  componentStyles: {
+    Header: {
+      // 🚀 We recomend to use `colorScheme` from variables mapping
+      root: ({ variables }) => ({
+        color: variables.color,
+        backgroundColor: variables.backgroundColor,
+      }),
+    },
+    Label: {
+      // 🚀 We recomend to use `colorScheme` from variables mapping
+      root: ({ variables }) => ({
+        color: variables.color,
+        backgroundColor: variables.backgroundColor,
+        fontSize: variables.fontSize,
+        height: variables.height
+      }),
+    },
+    Breadcrumb: {
+      // 🚀 We recomend to use `colorScheme` from variables mapping
+      root: ({ variables }) => ({
+        backgroundColor: variables.backgroundColor,
+        fontSize: variables.fontSize
+      }),
+    },
+  },
+}
 
 function App({ Component, pageProps }) {
   return (
-    <Provider theme={teamsTheme}>
-      <Header theme={theme}/>
+    <Provider theme={mergeThemes(teamsTheme, theme)}>
+      <HeaderComponent theme={theme}/>
       <Content theme={theme}/>
     </Provider>
   )
