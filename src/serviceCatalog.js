@@ -347,5 +347,19 @@ export const sc = {
         "name": "multiCategoryClassify",
         "serviceSpecificConfig": {},
         "serviceSpecificConfigDefaults": {}
+    },
+    "huggingFaceNER": {
+        "bpaServiceId": "abc123",
+        "inputTypes": [
+            "text"
+        ],
+        "outputTypes": [
+            "huggingFaceNER"
+        ],
+        "image": customNER,
+        "label": "HuggingFace Pretrained NER Model",
+        "name": "huggingFaceNER",
+        "serviceSpecificConfig": {},
+        "serviceSpecificConfigDefaults": {}
     }
 }

@@ -9,6 +9,7 @@ import FormRecCustomDialog from './FormRecCustomDialog';
 import LanguageCustomNerDialog from './LanguageCustomNerDialog';
 import LanguageMultiClassifyDialog from './LanguageMultiClassifyDialog';
 import LanguageSingleClassifyDialog from './LanguageSingleClassifyDialog'
+import HuggingFaceDialog from './HuggingFaceDialog'
 
 import { sc } from './serviceCatalog'
 import { Button, Label } from '@fluentui/react-northstar'
@@ -25,6 +26,7 @@ export default function Stages(props) {
     const [hideCustomNerDialog, setHideCustomNerDialog] = useState(true)
     const [hideCustomSingleDialog, setHideCustomSingleDialog] = useState(true)
     const [hideCustomMultiDialog, setHideCustomMultiDialog] = useState(true)
+    const [hideHuggingFaceDialog, setHideHuggingFaceDialog] = useState(true)
 
     const [currentOption, setCurrentOption] = useState(null)
 
@@ -100,19 +102,23 @@ export default function Stages(props) {
         if (event.name === 'translate') {
             setCurrentOption(_.cloneDeep(event))
             setHideTranslateDialog(false)
-        } else if (event.name === 'customFormRec'){
+        }
+        else if (event.name === 'huggingFaceNER') {
+            setCurrentOption(_.cloneDeep(event))
+            setHideHuggingFaceDialog(false)
+        } else if (event.name === 'customFormRec') {
             setCurrentOption(_.cloneDeep(event))
             setHideFormRecDialog(false)
-        } else if (event.name === 'recognizeCustomEntities'){
+        } else if (event.name === 'recognizeCustomEntities') {
             setCurrentOption(_.cloneDeep(event))
             setHideCustomNerDialog(false)
-        }else if (event.name === 'singleCategoryClassify'){
+        } else if (event.name === 'singleCategoryClassify') {
             setCurrentOption(_.cloneDeep(event))
             setHideCustomSingleDialog(false)
-        }else if (event.name === 'multiCategoryClassify'){
+        } else if (event.name === 'multiCategoryClassify') {
             setCurrentOption(_.cloneDeep(event))
             setHideCustomMultiDialog(false)
-        }else {
+        } else {
             addItemToPipeline(event)
         }
 
@@ -133,12 +139,13 @@ export default function Stages(props) {
     const renderStageTop = () => {
         return (
             <>
-                <Label style={{color : "black"}}>Select a stage to add it to your pipeline configuration</Label>
+                <Label style={{ color: "black" }}>Select a stage to add it to your pipeline configuration</Label>
                 <LanguageSingleClassifyDialog hideDialog={hideCustomSingleDialog} setHideDialog={setHideCustomSingleDialog} currentOption={currentOption} addItemToPipeline={addItemToPipeline} />
                 <LanguageMultiClassifyDialog hideDialog={hideCustomMultiDialog} setHideDialog={setHideCustomMultiDialog} currentOption={currentOption} addItemToPipeline={addItemToPipeline} />
                 <LanguageCustomNerDialog hideDialog={hideCustomNerDialog} setHideDialog={setHideCustomNerDialog} currentOption={currentOption} addItemToPipeline={addItemToPipeline} />
                 <FormRecCustomDialog hideDialog={hideFormRecDialog} setHideDialog={setHideFormRecDialog} currentOption={currentOption} addItemToPipeline={addItemToPipeline} />
                 <LanguageDialog hideDialog={hideTranslateDialog} setHideDialog={setHideTranslateDialog} currentOption={currentOption} addItemToPipeline={addItemToPipeline} />
+                <HuggingFaceDialog hideDialog={hideHuggingFaceDialog} setHideDialog={setHideHuggingFaceDialog} currentOption={currentOption} addItemToPipeline={addItemToPipeline} />
 
                 {renderOptions(options)}
             </>
@@ -149,13 +156,13 @@ export default function Stages(props) {
         if (stages && stages.length > 0) {
             return (
                 <>
-                    <Label style={{color: "black"}}>Pipeline Preview</Label>
+                    <Label style={{ color: "black" }}>Pipeline Preview</Label>
                     <PipelinePreview stages={stages} />
                     <div style={{
                         marginLeft: "700px",
                         marginBottom: "50px"
                     }}>
-                        <Button onClick={onResetPipeline} content="Reset Pipeline"/>{' '}
+                        <Button onClick={onResetPipeline} content="Reset Pipeline" />{' '}
                         <Button onClick={onDone} content="Done" primary />{' '}
                     </div>
                 </>
